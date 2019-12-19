@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="1024dp"
+    android:layout_height="768dp"
+    android:background="#ffffcb"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_marginBottom="30dp"
+        android:layout_x="0dp"
+        android:layout_y="101dp"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:text="断相保护器测试台"
+        android:textColor="#62332E"
+        android:textSize="81sp"
+        tools:layout_editor_absoluteX="710dp"
+        tools:layout_editor_absoluteY="327dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="200dp"
+        android:layout_x="243dp"
+        android:layout_y="315dp"
+        android:background="@drawable/chushi"
+        android:text="测       试"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="406dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_x="572dp"
+        android:layout_y="315dp"
+        android:background="@drawable/chushi"
+        android:text="按日期查询"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="406dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="200dp"
+        android:layout_x="243dp"
+        android:layout_y="404dp"
+        android:background="@drawable/chushi"
+
+        android:text="设       置"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="406dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_x="572dp"
+        android:layout_y="404dp"
+        android:background="@drawable/chushi"
+        android:text="按编号查询"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="406dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="200dp"
+        android:layout_x="243dp"
+        android:layout_y="491dp"
+        android:background="@drawable/chushi"
+        android:text="统       计"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="406dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_x="572dp"
+        android:layout_y="491dp"
+        android:background="@drawable/chushi"
+        android:text="误差分析"
+        android:textSize="36sp"
+        tools:layout_editor_absoluteX="406dp"
+        tools:layout_editor_absoluteY="561dp" />
+
+</AbsoluteLayout>

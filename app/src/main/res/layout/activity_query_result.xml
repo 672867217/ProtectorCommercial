@@ -1,0 +1,2229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="1024dp"
+    android:layout_height="768dp"
+    android:background="#6665fe"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".DateQuery">
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="252dp"
+        android:layout_y="28dp"
+        android:text="ERP通讯："
+        android:textColor="#fff"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="32dp"
+        android:layout_y="29dp"
+        android:text="内部通讯："
+        android:textColor="#fff"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <TextView
+        android:id="@+id/erptongxun"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:layout_x="347dp"
+        android:layout_y="28dp"
+        android:background="@drawable/f_yuanjiao"
+        android:gravity="center"
+        android:text="脱机"
+        android:textColor="#000"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <TextView
+        android:id="@+id/neibutongxun2"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
+        android:layout_x="133dp"
+        android:layout_y="28dp"
+        android:background="@drawable/f_yuanjiao"
+        android:gravity="center"
+        android:text="正常"
+        android:textColor="#000"
+        android:textSize="15dp"
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <Button
+        android:id="@+id/btn_dayin"
+        android:layout_width="161dp"
+        android:layout_height="35dp"
+        android:layout_x="691dp"
+        android:layout_y="24dp"
+        android:background="@drawable/dayinceshibaobao"
+        android:text="打印测试报告"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="73dp"
+        android:layout_height="35dp"
+        android:layout_x="876dp"
+        android:layout_y="23dp"
+        android:background="@drawable/baocun"
+        android:text="返  回"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="101dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:layout_x="34dp"
+        android:layout_y="72dp"
+        android:gravity="center|left"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:text="产品名称 :"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/stats_spinner"
+            android:layout_width="240dp"
+            android:layout_height="25dp"
+            android:paddingRight="10dp"
+            android:background="@drawable/my_spinner"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="81dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="型号 :  "
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/stats_tv1"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test2_2"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="产品编号 : "
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test2_2"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="230dp"
+        android:layout_height="229dp"
+        android:layout_x="20dp"
+        android:layout_y="116dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/result_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rouseyuanjiao"
+            android:gravity="center"
+            android:text="工位1"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <AbsoluteLayout
+            android:layout_width="match_parent"
+            android:layout_height="187dp"
+            android:background="@drawable/bg_ziseyuanjiao2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="20dp"
+                android:layout_y="12dp"
+                android:text="测试程序 :"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/result_tv2"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:layout_x="104dp"
+                android:layout_y="15dp"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="19dp"
+                android:layout_y="40dp"
+                android:text="测试工位 :"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/result_tv3"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:layout_x="104dp"
+                android:layout_y="42dp"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="21dp"
+                android:layout_y="70dp"
+                android:text="测试日期 :"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/result_tv4"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:layout_x="104dp"
+                android:layout_y="70dp"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="19dp"
+                android:layout_y="97dp"
+                android:text="开始时间 :"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/result_tv5"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:layout_x="104dp"
+                android:layout_y="98dp"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="19dp"
+                android:layout_y="125dp"
+                android:text="结束时间 :"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/result_tv6"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:layout_x="104dp"
+                android:layout_y="126dp"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="20dp"
+                android:layout_y="153dp"
+                android:text="测  试  人 :"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/result_tv7"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:layout_x="104dp"
+                android:layout_y="155dp"
+                android:background="@drawable/dialog_test2_2"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+        </AbsoluteLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="355dp"
+        android:layout_height="266dp"
+        android:layout_x="271dp"
+        android:layout_y="116dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/test_item2_tv"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rouseyuanjiao"
+            android:gravity="center"
+            android:text="A机作为主控"
+            android:textColor="#000"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:id="@+id/q13"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_ziseyuanjiao2"
+            android:gravity="top|center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="故障测试"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="19sp" />
+
+            <AbsoluteLayout
+                android:layout_width="325dp"
+                android:layout_height="70dp"
+
+                android:layout_marginTop="5dp"
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/q1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="12dp"
+                    android:layout_y="8dp"
+                    android:text="A机 ："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv8"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="59dp"
+                    android:layout_y="8dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_x="170dp"
+                    android:layout_y="8dp"
+                    android:text="A驱动 ："
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv9"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="232dp"
+                    android:layout_y="9dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/q2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="12dp"
+                    android:layout_y="36dp"
+                    android:text="B机 ："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv10"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="59dp"
+                    android:layout_y="35dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_x="170dp"
+                    android:layout_y="36dp"
+                    android:text="B驱动 ："
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv11"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="232dp"
+                    android:layout_y="36dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+            </AbsoluteLayout>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="误差"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <AbsoluteLayout
+                android:layout_width="325dp"
+                android:layout_height="70dp"
+
+                android:layout_marginTop="5dp"
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/q5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="11dp"
+                    android:layout_y="11dp"
+                    android:text="A相电流："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv12"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="83dp"
+                    android:layout_y="11dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="143dp"
+                    android:layout_y="11dp"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/q7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_x="171dp"
+                    android:layout_y="11dp"
+                    android:text="C相电流："
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv13"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="246dp"
+                    android:layout_y="11dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="304dp"
+                    android:layout_y="11dp"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+
+                <TextView
+
+                    android:id="@+id/q6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="11dp"
+                    android:layout_y="39dp"
+                    android:text="B相电流："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv14"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="83dp"
+                    android:layout_y="39dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="143dp"
+                    android:layout_y="39dp"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_x="164dp"
+                    android:layout_y="39dp"
+                    android:text="驱动电压："
+                    android:textColor="#3a3cba"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv15"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="246dp"
+                    android:layout_y="39dp"
+                    android:background="@drawable/dialog_test4_baocun"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#3a3cba"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="304dp"
+                    android:layout_y="39dp"
+                    android:text="V"
+                    android:textAlignment="center"
+                    android:textColor="#3a3cba"
+                    android:textSize="16sp" />
+
+            </AbsoluteLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="355dp"
+        android:layout_height="266dp"
+        android:layout_x="646dp"
+        android:layout_y="116dp"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:id="@+id/q29"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rouseyuanjiao"
+            android:gravity="center"
+            android:text="B机作为主控"
+            android:textColor="#000000"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:id="@+id/q28"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_ziseyuanjiao2"
+            android:gravity="top|center"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/q14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="故障测试"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <AbsoluteLayout
+                android:layout_width="325dp"
+                android:layout_height="70dp"
+
+                android:layout_marginTop="5dp"
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/q15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="12dp"
+                    android:layout_y="8dp"
+                    android:text="A机 ："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv16"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="59dp"
+                    android:layout_y="8dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_x="170dp"
+                    android:layout_y="7dp"
+                    android:text="A驱动 ："
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv17"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="232dp"
+                    android:layout_y="8dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/q16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="12dp"
+                    android:layout_y="35dp"
+                    android:text="B机 ："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv18"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="59dp"
+                    android:layout_y="35dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_x="170dp"
+                    android:layout_y="36dp"
+                    android:text="B驱动 ："
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv19"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="232dp"
+                    android:layout_y="37dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="通过"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+            </AbsoluteLayout>
+
+            <TextView
+
+                android:id="@+id/q19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="误差"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <AbsoluteLayout
+                android:layout_width="325dp"
+                android:layout_height="70dp"
+
+                android:layout_marginTop="5dp"
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/q20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="11dp"
+                    android:layout_y="11dp"
+                    android:text="A相电流："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv20"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="83dp"
+                    android:layout_y="11dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="143dp"
+                    android:layout_y="11dp"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_x="171dp"
+                    android:layout_y="11dp"
+                    android:text="C相电流："
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv21"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="246dp"
+                    android:layout_y="11dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="304dp"
+                    android:layout_y="11dp"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/q21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="11dp"
+                    android:layout_y="39dp"
+                    android:text="B相电流："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv22"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="83dp"
+                    android:layout_y="39dp"
+                    android:background="@drawable/dialog_test2_2"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="143dp"
+                    android:layout_y="39dp"
+                    android:text="A"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_x="164dp"
+                    android:layout_y="39dp"
+                    android:text="驱动电压："
+                    android:textColor="#3a3cba"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/result_tv23"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_x="246dp"
+                    android:layout_y="39dp"
+                    android:background="@drawable/dialog_test4_baocun"
+                    android:gravity="center"
+                    android:text="+0.05"
+                    android:textColor="#3a3cba"
+                    android:textSize="16sp" />
+
+                <TextView
+
+                    android:id="@+id/q27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_x="304dp"
+                    android:layout_y="39dp"
+                    android:text="V"
+                    android:textAlignment="center"
+                    android:textColor="#3a3cba"
+                    android:textSize="16sp" />
+
+            </AbsoluteLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/test_item2_tv6"
+        android:layout_width="230dp"
+        android:layout_height="41dp"
+        android:layout_x="20dp"
+        android:layout_y="360dp"
+        android:background="@drawable/bg_rouseyuanjiao"
+        android:gravity="center"
+        android:text="测试结果"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <AbsoluteLayout
+        android:layout_width="981dp"
+        android:layout_height="347dp"
+        android:layout_x="20dp"
+        android:layout_y="400dp"
+        android:background="@drawable/bg_ziseyuanjiao3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="230dp"
+            android:layout_height="210dp"
+            android:layout_x="20dp"
+            android:layout_y="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="时间特性"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13  秒  限  时 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv1"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="13.05"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="s     "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30  秒  限  时 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv2"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="30.25"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="s     "
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="启  动  响  应 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv3"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="136"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A相断相响应："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv4"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B相断相响应："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv5"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="245"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C相断相响应："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv6"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="230"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="ms"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="223dp"
+            android:layout_height="92dp"
+            android:layout_x="516dp"
+            android:layout_y="127dp"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:text="断相报警接点状态"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="205dp"
+                android:layout_height="match_parent"
+                android:background="#e6E6E6"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="44dp"
+                    android:layout_height="wrap_content"
+                    android:text="前 ："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/jietong" />
+
+                <TextView
+
+                    android:layout_width="43dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="后 ："
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/image2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/weijietong" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="470dp"
+            android:layout_height="213dp"
+            android:layout_x="267dp"
+            android:layout_y="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="电气特性"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="A相断相直流电压："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv7"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="0.05"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:text="线圈并联电压："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/result2_tv8"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="B相断相直流电压："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv9"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:text="线圈串联电压："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/result2_tv10"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="C相断相直流电压："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv11"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:text="最小绝缘电阻："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/result2_tv12"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="250dp"
+                android:layout_height="92dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#e6e6e6"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="131dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left"
+                        android:text="A相一次侧压降："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv13"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#e6e6e6"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="131dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="B相一次侧压降："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv14"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="336dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#e6e6e6"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="131dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="C相一次侧压降："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv15"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="236"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="209dp"
+            android:layout_height="326dp"
+            android:layout_x="756dp"
+            android:layout_y="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="绝缘电阻测试结果"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AB相同     ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv16"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BC相同     ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv17"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AC相同     ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv18"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A相 -地     ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv19"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B相 -地     ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv20"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C相 -地     ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv21"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A相-线圈 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv22"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B相-线圈 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv23"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C相-线圈 ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv24"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="线圈-地    ："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result2_tv25"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="11111"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="MΩ"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="230dp"
+            android:layout_height="87dp"
+            android:layout_x="20dp"
+            android:layout_y="244dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/jielun"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_x="20dp"
+                android:layout_y="467dp"
+                android:background="@drawable/bg_lvseyuanjiao"
+                android:gravity="center"
+                android:text="测试结论"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/result_tv26"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_x="20dp"
+                android:layout_y="467dp"
+                android:background="@drawable/bg_huiseyuanjiao2"
+                android:gravity="center"
+                android:text="检测到产品符合要求"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="469dp"
+            android:layout_height="110dp"
+            android:layout_x="267dp"
+            android:layout_y="221dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:text="极限情况线圈串联电压"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+
+                android:background="#e6e6e6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="304V/1A时："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result_tv27"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="23.25"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="30dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:text="437V/1A时："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result_tv28"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="23.25"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="304V/5A时："
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result_tv29"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="23.25"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="30dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:text="437V/5A时："
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/result_tv30"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/dialog_test2_2"
+                        android:gravity="right|center"
+                        android:paddingRight="5dp"
+                        android:text="23.25"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:text="V"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </AbsoluteLayout>
+
+
+</AbsoluteLayout>

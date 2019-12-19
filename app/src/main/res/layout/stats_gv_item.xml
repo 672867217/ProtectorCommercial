@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="972dp"
+    android:layout_height="405dp"
+    android:orientation="vertical">
+
+    <AbsoluteLayout
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="111dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="242dp"
+            android:layout_y="24dp"
+            android:background="@drawable/bg_huisebiankuang"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="44dp">
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/stats_item_tv"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_x="0dp"
+            android:layout_y="0dp"
+            android:background="@drawable/fenseshangyuanjiao"
+            android:gravity="center"
+            android:text="一测统计"
+            android:textColor="#000000"
+            android:textSize="25sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="49dp"
+            android:text="测试数量  :  "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stats_item_tv1"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="97dp"
+            android:layout_y="50dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="78dp"
+            android:text="通过数量  :  "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stats_item_tv2"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="97dp"
+            android:layout_y="78dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="11dp"
+            android:layout_y="108dp"
+            android:text="未通过数  :  "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stats_item_tv3"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="97dp"
+            android:layout_y="109dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="11dp"
+            android:layout_y="139dp"
+            android:text="通过比率  :  "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stats_item_tv4"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_x="97dp"
+            android:layout_y="139dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_x="146dp"
+            android:layout_y="139dp"
+            android:gravity="center"
+            android:text="%"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="13dp"
+            android:layout_y="168dp"
+            android:text="平均用时  :  "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stats_item_tv5"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="97dp"
+            android:layout_y="170dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="197dp"
+            android:text="最小用时  :  "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stats_item_tv6"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="97dp"
+            android:layout_y="197dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="12dp"
+            android:layout_y="228dp"
+            android:text="最大用时  :  "
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/stats_item_tv7"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="97dp"
+            android:layout_y="228dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+
+    </AbsoluteLayout>
+</LinearLayout>

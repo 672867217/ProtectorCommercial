@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="280dp"
+        android:layout_x="521dp"
+        android:layout_y="328dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/test_dialog1_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_test1_1"
+            android:text="班次设置"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/dialog_test1_2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/test_dialog1_btn1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/jixushangyiban"
+                android:text="继续上一班"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="36dp" />
+
+            <Button
+                android:id="@+id/test_dialog1_btn2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/kaishixinbanci"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:text="开始新班次"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="36dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
