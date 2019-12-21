@@ -137,7 +137,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
         list1 = new ArrayList();
         list1.add("男");
         list1.add("女");
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             list2.add(i + 1 + "");
         }
 
@@ -216,18 +216,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
                             xiuGai = DataSupport.find(XiuGai.class, 2);
                             a1 = 2;
                             break;
-                        case 3:
-                            xiuGai = DataSupport.find(XiuGai.class, 3);
-                            a1 = 3;
-                            break;
-                        case 4:
-                            xiuGai = DataSupport.find(XiuGai.class, 4);
-                            a1 = 4;
-                            break;
-                        case 5:
-                            xiuGai = DataSupport.find(XiuGai.class, 5);
-                            a1 = 5;
-                            break;
+                        default:
+                            return;
                     }
                     xiuGai.setCecheng(new Utils().HexToInt(list.get(6)) + "");
                     xiuGai.setQidong(new Utils().HexToInt(list.get(7)) + "");
@@ -284,8 +274,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
                     testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                     testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                     testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                     testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                     testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                     testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -297,6 +287,9 @@ public class Setting extends MyDialog implements View.OnClickListener {
                     testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                     testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                     app.map.put(new Utils().HexToInt(list.get(5)) + "", testData);
+                    if (testData.getCecheng().equals("4")) {
+                        testData.save();
+                    }
                 }
             }
         });
@@ -376,8 +369,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
         xiuGai.setM30("1");
         xiuGai.setChuanlian1("20.0");
         xiuGai.setChuanlian2("27.5");
-        xiuGai.setBinglian1("10.0");
-        xiuGai.setBinglian2("14.0");
+        xiuGai.setBinglian1("20.0");
+        xiuGai.setBinglian2("27.5");
         xiuGai.setDuanxiangzhiliu("0.2");
         xiuGai.setJiaoliu("3.0");
         xiuGai.setXiangjian("500");
@@ -448,8 +441,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
     }
 
     private void initView() {
-        erptongxun = (TextView) findViewById(R.id.erptongxun);
-        neibutongxun2 = (TextView) findViewById(R.id.neibutongxun2);
+
+
         fanhui = (Button) findViewById(R.id.fanhui);
         fanhui2 = (Button) findViewById(R.id.fanhui2);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -515,13 +508,12 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.fanhui2:
-                String q = "";
-                if (new Utils().getXor(new Utils().getDivLines("AAFF00500" + spinner.getSelectedItem(), 2)).length() < 2) {
-                    q += "0" + new Utils().getXor(new Utils().getDivLines("AAFF00500" + spinner.getSelectedItem(), 2));
-                } else {
-                    q += new Utils().getXor(new Utils().getDivLines("AAFF00500" + spinner.getSelectedItem(), 2));
+                int q = new Utils().getXor(new Utils().getDivLines("AAFF0050010" + spinner.getSelectedItem(), 2));
+                int aa = Integer.parseInt((String) spinner.getSelectedItem());
+                int[] arr = new int[]{0xaa, 0xff, 0x00, 0x50, 0x01, 0x00 + aa, 0x00 + q};
+                for (int i = 0; i < arr.length; i++) {
+                    util.sendSerialPort(arr[i]);
                 }
-                util.sendSerialPort("AAFF0050010" + spinner.getSelectedItem() +""+ q);
                 break;
             case R.id.button8:
                 //添加产品
@@ -546,17 +538,17 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (editText.getText().toString().equals("")) {
+                        if (editText.getText().toString().trim().equals("")) {
                             Toast.makeText(mycontext, "产品名称不能为空", Toast.LENGTH_SHORT).show();
-                        } else if (editText2.getText().toString().equals("")) {
+                        } else if (editText2.getText().toString().trim().equals("")) {
                             Toast.makeText(mycontext, "产品型号不能为空", Toast.LENGTH_SHORT).show();
-                        } else if (editText3.getText().toString().equals("")) {
+                        } else if (editText3.getText().toString().trim().equals("")) {
                             Toast.makeText(mycontext, "生产厂家不能为空", Toast.LENGTH_SHORT).show();
                         } else {
                             ProductType type = new ProductType();
-                            type.setName(editText.getText().toString());
-                            type.setXinghao(editText2.getText().toString());
-                            type.setChangjia(editText3.getText().toString());
+                            type.setName(editText.getText().toString().trim());
+                            type.setXinghao(editText2.getText().toString().trim());
+                            type.setChangjia(editText3.getText().toString().trim());
                             type.save();
                             myDialog.dismiss();
                             init();
@@ -597,16 +589,16 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (editText.getText().toString().equals("")) {
+                        if (editText.getText().toString().trim().equals("")) {
                             Toast.makeText(mycontext, "产品名称不能为空", Toast.LENGTH_SHORT).show();
-                        } else if (editText2.getText().toString().equals("")) {
+                        } else if (editText2.getText().toString().trim().equals("")) {
                             Toast.makeText(mycontext, "产品型号不能为空", Toast.LENGTH_SHORT).show();
-                        } else if (editText3.getText().toString().equals("")) {
+                        } else if (editText3.getText().toString().trim().equals("")) {
                             Toast.makeText(mycontext, "生产厂家不能为空", Toast.LENGTH_SHORT).show();
                         } else {
-                            type.setName(editText.getText().toString());
-                            type.setXinghao(editText2.getText().toString());
-                            type.setChangjia(editText3.getText().toString());
+                            type.setName(editText.getText().toString().trim());
+                            type.setXinghao(editText2.getText().toString().trim());
+                            type.setChangjia(editText3.getText().toString().trim());
                             type.save();
                             myDialog.dismiss();
                             init();
@@ -712,11 +704,11 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (editText.getText().toString().equals("")) {
+                        if (editText.getText().toString().trim().equals("")) {
                             Toast.makeText(mycontext, "操作员不能为空", Toast.LENGTH_SHORT).show();
                         } else {
                             Operator operator = new Operator();
-                            operator.setName(editText.getText().toString());
+                            operator.setName(editText.getText().toString().trim());
                             operator.setNumber(list.get(a) + "");
                             operator.setSex(list1.get(b) + "");
                             operator.save();
@@ -756,7 +748,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 spinner1.setAdapter(adapter);
                 spinner2.setAdapter(adapter2);
                 spinner1.setSelection(Integer.parseInt(textView9.getText().toString()) - 1, true);
-                if (textView10.getText().equals("男")) {
+                if (textView10.getText().toString().equals("男")) {
                     spinner2.setSelection(0, true);
                 } else {
                     spinner2.setSelection(1, true);
@@ -767,15 +759,19 @@ public class Setting extends MyDialog implements View.OnClickListener {
                 button7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Operator operator = DataSupport.find(Operator.class, index2 + 1);
-                        operator.setName(editText.getText().toString());
-                        operator.setNumber(list.get(a) + "");
-                        operator.setSex(list1.get(b) + "");
-                        operator.save();
-                        Toast.makeText(mycontext, "修改成功", Toast.LENGTH_SHORT).show();
-                        init();
-                        arrayAdapter2.notifyDataSetChanged();
-                        myDialog.dismiss();
+                        if (editText.getText().toString().trim().equals("")) {
+                            Toast.makeText(mycontext, "操作员不能为空", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Operator operator = DataSupport.find(Operator.class, index2 + 1);
+                            operator.setName(editText.getText().toString().trim());
+                            operator.setNumber(list.get(a) + "");
+                            operator.setSex(list1.get(b) + "");
+                            operator.save();
+                            Toast.makeText(mycontext, "修改成功", Toast.LENGTH_SHORT).show();
+                            init();
+                            arrayAdapter2.notifyDataSetChanged();
+                            myDialog.dismiss();
+                        }
                     }
                 });
                 button17.setOnClickListener(new View.OnClickListener() {
@@ -890,8 +886,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
                         xiuGai.setM30("1");
                         xiuGai.setChuanlian1("20.0");
                         xiuGai.setChuanlian2("27.5");
-                        xiuGai.setBinglian1("10.0");
-                        xiuGai.setBinglian2("14.0");
+                        xiuGai.setBinglian1("20.0");
+                        xiuGai.setBinglian2("27.5");
                         xiuGai.setDuanxiangzhiliu("0.2");
                         xiuGai.setJiaoliu("3.0");
                         xiuGai.setXiangjian("500");
@@ -899,7 +895,10 @@ public class Setting extends MyDialog implements View.OnClickListener {
                         xiuGai.setXiangduixianquan("500");
                         xiuGai.setXianquan("500");
                         xiuGai.save();
-                        util.sendSerialPort(cmd(Integer.parseInt((String) spinner.getSelectedItem())));
+                        int[] arr = cmd(Integer.parseInt((String) spinner.getSelectedItem()));
+                        for (int j = 0; j < arr.length; j++) {
+                            util.sendSerialPort(arr[j]);
+                        }
                     }
                 });
                 alertDialog.setButton2("取消", new DialogInterface.OnClickListener() {
@@ -920,7 +919,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
         return super.onTouchEvent(event);
     }
 
-    private String cmd(int gonwei) {
+    private int[] cmd(int gonwei) {
         String s = "AAFF0051190" + gonwei + "01";
         if (Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong()))).length() == 2) {
             s += Integer.toHexString((int) (Float.parseFloat(xiuGai.getQidong())));
@@ -1010,12 +1009,13 @@ public class Setting extends MyDialog implements View.OnClickListener {
         } else {
             s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
         }
-        if (new Utils().getXor(new Utils().getDivLines(s, 2)).length() < 2) {
-            s += "0" + new Utils().getXor(new Utils().getDivLines(s, 2));
-        } else {
-            s += new Utils().getXor(new Utils().getDivLines(s, 2));
+        int[] arr = new int[31];
+        List list = new Utils().getDivLines(s, 2);
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = 0x00 + Integer.parseInt((String) list.get(i), 16);
         }
-        return s;
+        arr[list.size()] = new Utils().getXor(new Utils().getDivLines(s, 2));
+        return arr;
     }
 
     class Chanpin {
@@ -1039,8 +1039,8 @@ public class Setting extends MyDialog implements View.OnClickListener {
         String m30 = "1";
         String chuanlian1 = "20.0";
         String chuanlian2 = "27.5";
-        String binglian1 = "10.0";
-        String binglian2 = "14.0";
+        String binglian1 = "20.0";
+        String binglian2 = "27.5";
         String duanxiangzhiliu = "0.2";
         String jiaoliu = "3.0";
         String xiangjian = "500";
@@ -1112,7 +1112,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
             return;
         }
         float g = Float.parseFloat(ed_binglian1.getText().toString().trim());
-        if (g < 10) {
+        if (g < 20) {
             Toast.makeText(mycontext, "只能输入大于10的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -1122,7 +1122,7 @@ public class Setting extends MyDialog implements View.OnClickListener {
             return;
         }
         float h = Float.parseFloat(ed_binglian2.getText().toString().trim());
-        if (h > 14) {
+        if (h > 27.5) {
             Toast.makeText(mycontext, "只能输入小于14的数值！", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -1171,7 +1171,10 @@ public class Setting extends MyDialog implements View.OnClickListener {
             Toast.makeText(mycontext, "不能留空！", Toast.LENGTH_SHORT).show();
             return;
         }
-        util.sendSerialPort(cmd(Integer.parseInt((String) spinner.getSelectedItem())));
+        int[] arr = cmd(Integer.parseInt((String) spinner.getSelectedItem()));
+        for (int jj = 0; jj < arr.length; jj++) {
+            util.sendSerialPort(arr[jj]);
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

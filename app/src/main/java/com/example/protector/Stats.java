@@ -40,7 +40,7 @@ public class Stats extends MyDialog implements View.OnClickListener {
     StatsGvItemAdapter adapter;
     private Calendar calendar;
     List<Bean> beanList = new ArrayList<>();
-    String[] strings = {"一测统计", "二测统计", "三测统计", "其他测统计", "汇总测统计",};
+    String[] strings = {"出所测试统计", "其他测试统计", "汇总统计",};
     String date1, date2;
     private TextView header_tv;
     private TextView header_tv2;
@@ -98,8 +98,8 @@ public class Stats extends MyDialog implements View.OnClickListener {
                     testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                     testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                     testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                     testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                     testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                     testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -111,6 +111,9 @@ public class Stats extends MyDialog implements View.OnClickListener {
                     testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                     testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                     app.map.put(new Utils().HexToInt(list.get(5))+"",testData);
+                    if(testData.getCecheng().equals("4")){
+                        testData.save();
+                    }
                 }
             }
         });
@@ -230,14 +233,15 @@ public class Stats extends MyDialog implements View.OnClickListener {
                         e.printStackTrace();
                     }
                 }
-                int[] arr = {1,2,3,0};
-                for (int i = 0; i < 5; i++) {
+                int[] arr = {4,0};
+                for (int i = 0; i < 3; i++) {
                     Bean bean = new Bean();
                     bean.name = strings[i];
                     int shuliang = 0, shichang = 0;
                     List<Integer> shichangList = new ArrayList<>();
                     for (int j = 0; j < dataList2.size(); j++) {
-                        if (i == 4) {
+
+                        if (i == 2) {
                             shuliang = dataList2.size();
                             shichang += Integer.parseInt(dataList2.get(j).getCeshishichang());
                             shichangList.add(Integer.valueOf(dataList2.get(j).getCeshishichang()));

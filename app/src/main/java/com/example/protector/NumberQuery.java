@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.protector.SQl.TestData;
 import com.example.protector.SQl.XiuGai;
 import com.example.protector.util.MyApplication;
+import com.example.protector.util.MyDialog;
 import com.example.protector.util.SerialPortUtil;
 import com.example.protector.util.Utils;
 
@@ -37,7 +38,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class NumberQuery extends AppCompatActivity implements View.OnClickListener {
+public class NumberQuery extends MyDialog implements View.OnClickListener {
 
     private TextView header_tv;
     private TextView header_tv2;
@@ -55,13 +56,13 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("HH:mm:ss");
     private MyApplication app;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_number_query);
+    private Context mycontext;
+    public NumberQuery(Context context, View layout, int style) {
+        super(context, layout, style);
+        mycontext = context;
         initView();
-        new Utils().hideNavKey(NumberQuery.this);
-        app = (MyApplication) getApplication();
+        new Utils().hideNavKey(mycontext);
+        app = (MyApplication) mycontext.getApplicationContext();
         MainActivity.utils.onReceive(new SerialPortUtil.Receive() {
             @Override
             public void set(String str, List<String> list) {
@@ -101,8 +102,8 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                     testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                     testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                     testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                     testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                     testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                     testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -114,24 +115,27 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                     testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                     testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                     app.map.put(new Utils().HexToInt(list.get(5))+"",testData);
+                    if(testData.getCecheng().equals("4")){
+                        testData.save();
+                    }
                 }
             }
         });
         list = new ArrayList();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             TestData testData = new TestData();
             list.add(testData);
         }
 
-        numberQueryItemAdapter = new NumberQueryItemAdapter(getApplicationContext(), list);
+        numberQueryItemAdapter = new NumberQueryItemAdapter(mycontext, list);
         gridView.setAdapter(numberQueryItemAdapter);
         numberQueryItemAdapter.notifyDataSetChanged();
         chanpinbianhao.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        im.hideSoftInputFromWindow(chanpinbianhao.getWindowToken(), 0);
+                    InputMethodManager im = (InputMethodManager) mycontext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    im.hideSoftInputFromWindow(chanpinbianhao.getWindowToken(), 0);
 
                 }
                 return true;
@@ -140,7 +144,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        InputMethodManager im = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager im = (InputMethodManager)mycontext.getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         return super.onTouchEvent(event);
     }
@@ -169,20 +173,14 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 int a = 0;
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(i).getChanpinbianma().equals(chanpinbianhao.getText().toString().trim())) {
-                        if (data.get(i).getCecheng().equals("1")) {
+                        if (data.get(i).getCecheng().equals("4")) {
                             list.set(0,data.get(i));
                             a++;
-                        } else if (data.get(i).getCecheng().equals("2")) {
+                        }else if (data.get(i).getCecheng().equals("0")) {
                             list.set(1,data.get(i));
                             a++;
-                        } else if (data.get(i).getCecheng().equals("3")) {
-                            list.set(2,data.get(i));
-                            a++;
-                        } else if (data.get(i).getCecheng().equals("0")) {
-                            list.set(3,data.get(i));
-                            a++;
                         }
-                        ArrayAdapter arrayAdapter = new ArrayAdapter(NumberQuery.this,R.layout.spinner, new String[]{data.get(i).getChanpinname()});
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(mycontext,R.layout.spinner, new String[]{data.get(i).getChanpinname()});
                         chanpin_spinner.setAdapter(arrayAdapter);
                         xinghao.setText(data.get(i).getXinghao());
                         shengchanchang.setText(data.get(i).getShengchanchang());
@@ -192,11 +190,11 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                     numberQueryItemAdapter.notifyDataSetChanged();
                 }else
                 {
-                    Toast.makeText(this, "没有查到"+chanpinbianhao.getText().toString()+"的数据", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mycontext, "没有查到"+chanpinbianhao.getText().toString()+"的数据", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.fanhui:
-                finish();
+                dismiss();
                 break;
         }
     }
@@ -216,7 +214,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
 
         @Override
         public int getCount() {
-            return 4;
+            return objects.size();
         }
 
         @Override
@@ -244,16 +242,10 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
 
             switch (position) {
                 case 0:
-                    holder.item1Title.setText("一测");
+                    holder.item1Title.setText("出所测");
                     break;
                 case 1:
-                    holder.item1Title.setText("二测");
-                    break;
-                case 2:
-                    holder.item1Title.setText("三测");
-                    break;
-                case 3:
-                    holder.item1Title.setText("其他");
+                    holder.item1Title.setText("其他测");
                     break;
             }
             if (!object.getAduanxiangxiangying().equals("0")) {
@@ -266,7 +258,6 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 holder.item1Tv5.setText(object.getQidongshijian());
                 int[] arr = new int[3];
                 double[] arr2 = new double[3];
-                double[] arr3 = new double[3];
                 final int[] arr4 = new int[9];
                 arr[0] = Integer.parseInt(object.getAduanxiangxiangying());
                 arr[1] = Integer.parseInt(object.getBduanxiangxiangying());
@@ -274,9 +265,6 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 arr2[0] = Double.parseDouble(object.getAduanxiangdianya());
                 arr2[1] = Double.parseDouble(object.getBduanxiangdianya());
                 arr2[2] = Double.parseDouble(object.getCduanxiangdianya());
-                arr3[0] = Double.parseDouble(object.getAxiangceyajiang());
-                arr3[1] = Double.parseDouble(object.getBxiangceyajiang());
-                arr3[2] = Double.parseDouble(object.getCxiangceyajiang());
                 arr4[0] = Integer.parseInt(object.getAbxiangjianjueyuan());
                 arr4[1] = Integer.parseInt(object.getAcxiangjianjueyuan());
                 arr4[2] = Integer.parseInt(object.getBcxiangjianjueyuan());
@@ -288,25 +276,23 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 arr4[8] = Integer.parseInt(object.getCxiangduixianquanjeuyuan());
                 Arrays.sort(arr);
                 Arrays.sort(arr2);
-                Arrays.sort(arr3);
                 Arrays.sort(arr4);
                 holder.item1Tv6.setText(arr[arr.length - 1] + "");
                 holder.item1Tv7.setText(object.getM13xianshishijian());
                 holder.item1Tv8.setText(object.getM30xianshishijian());
                 holder.item1Tv9.setText(object.getXianquanchuanlian5());
                 holder.item1Tv10.setText(arr2[arr2.length - 1] + "");
-                holder.item1Tv11.setText(arr3[arr3.length - 1] + "");
                 holder.item1Tv12.setText(arr4[0] + "");
                 holder.item1Title.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), QueryResult.class);
+                        Intent intent = new Intent(mycontext, QueryResult.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("data", object);
                         bundle.putInt("dianzu", arr4[0]);
                         bundle.putInt("flag", 1);
                         intent.putExtra("s", bundle);
-                        startActivity(intent);
+                        mycontext.startActivity(intent);
                     }
                 });
                 boolean is = true;
@@ -347,20 +333,10 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                     holder.item1Tv10.setBackgroundResource(R.drawable.dialog_test2_3);
                     is = false;
                 }
-                if (arr3[2] * 100
-                        > Double.parseDouble(xiuGai.getJiaoliu()) * 100) {
-                    holder.item1Tv11.setBackgroundResource(R.drawable.dialog_test2_3);
-                    is = false;
-                }
                 if (arr4[0] * 100
                        < Double.parseDouble(xiuGai.getXianquan()) * 100) {
                     holder.item1Tv12.setBackgroundResource(R.drawable.dialog_test2_3);
                     is = false;
-                }
-                holder.item1Tv13.setText(guzhang(object.getAjiguzhang(), object.getBjiguzhang()));
-                if(guzhang(object.getAjiguzhang(), object.getBjiguzhang()).equals("不合格"))
-                {
-                    holder.item1Tv13.setBackgroundResource(R.drawable.dialog_test2_3);
                 }
                 if (object.getTongguo().equals("合格")) {
                     holder.item1Tv14.setText("合格");
@@ -373,7 +349,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
             holder.item1Btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(NumberQuery.this, "测试中。。。", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mycontext, "测试中。。。", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -397,9 +373,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
             private TextView item1Tv8;
             private TextView item1Tv9;
             private TextView item1Tv10;
-            private TextView item1Tv11;
             private TextView item1Tv12;
-            private TextView item1Tv13;
             private TextView item1Tv14;
             private Button item1Btn;
 
@@ -415,9 +389,7 @@ public class NumberQuery extends AppCompatActivity implements View.OnClickListen
                 item1Tv8 = (TextView) view.findViewById(R.id.item1_tv8);
                 item1Tv9 = (TextView) view.findViewById(R.id.item1_tv9);
                 item1Tv10 = (TextView) view.findViewById(R.id.item1_tv10);
-                item1Tv11 = (TextView) view.findViewById(R.id.item1_tv11);
                 item1Tv12 = (TextView) view.findViewById(R.id.item1_tv12);
-                item1Tv13 = (TextView) view.findViewById(R.id.item1_tv13);
                 item1Tv14 = (TextView) view.findViewById(R.id.item1_tv14);
                 item1Btn = (Button) view.findViewById(R.id.item1_btn);
             }

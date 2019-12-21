@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsoluteLayout;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -57,7 +58,7 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
     private TextView header_tv4;
     private Button btn_dayin;
     private Button btn_cancel;
-    private Spinner stats_spinner;
+    private TextView stats_spinner;
     private TextView stats_tv1;
     private TextView textView5;
     private TextView textView6;
@@ -119,6 +120,10 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
     private TextView q6;
     private TextView q10;
     private TextView q8;
+    private AbsoluteLayout w1;
+    private AbsoluteLayout w2;
+    private AbsoluteLayout w3;
+    private AbsoluteLayout w4;
     private TextView q12;
     private TextView q29;
     private LinearLayout q28;
@@ -182,8 +187,8 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
                     testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                     testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                     testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                     testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                     testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                     testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -195,6 +200,9 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
                     testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                     testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                     app.map.put(new Utils().HexToInt(list.get(5))+"",testData);
+                    if(testData.getCecheng().equals("4")){
+                        testData.save();
+                    }
                 }
             }
         });
@@ -219,11 +227,15 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
             dianzu = arr4[0];
         }
         xiuGai = DataSupport.find(XiuGai.class, Long.parseLong(testData.getGongwei()));
-        ArrayAdapter arrayAdapter = new ArrayAdapter(QueryResult.this, R.layout.spinner, new String[]{testData.getChanpinname() + ""});
-        stats_spinner.setAdapter(arrayAdapter);
+        stats_spinner.setText(testData.getChanpinname());
         stats_tv1.setText(testData.getXinghao());
         textView6.setText(testData.getChanpinbianma());
-        result_tv2.setText(testData.getCecheng());
+        if(testData.getCecheng().equals("4")){
+            result_tv2.setText("出所测");
+        }else{
+            result_tv2.setText("其他测");
+        }
+
         result_tv3.setText(testData.getGongwei());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("HH:mm:ss");
@@ -366,11 +378,11 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
             result_tv23.setTextColor(Color.WHITE);
             result_tv23.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Math.abs(Double.parseDouble(testData.getM13xianshishijian()))-13>Double.parseDouble(xiuGai.getM13())){
+        if(Math.abs(Double.parseDouble(testData.getM13xianshishijian())-13)>Double.parseDouble(xiuGai.getM13())){
             result2_tv1.setTextColor(Color.WHITE);
             result2_tv1.setBackgroundResource(R.drawable.dialog_test2_3);
         }
-        if(Math.abs(Double.parseDouble(testData.getM30xianshishijian()))-30>Double.parseDouble(xiuGai.getM30())){
+        if(Math.abs(Double.parseDouble(testData.getM30xianshishijian())-30)>Double.parseDouble(xiuGai.getM30())){
             result2_tv2.setTextColor(Color.WHITE);
             result2_tv2.setBackgroundResource(R.drawable.dialog_test2_3);
         }
@@ -489,6 +501,10 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
             result_tv30.setBackgroundResource(R.drawable.dialog_test2_3);
         }
         if(testData.getBaojin().charAt(13) == '0'){
+            w1.setBackgroundResource(R.drawable.bg_huisebian2);
+            w2.setBackgroundResource(R.drawable.bg_huisebian2);
+            w3.setBackgroundResource(R.drawable.bg_huisebian2);
+            w4.setBackgroundResource(R.drawable.bg_huisebian2);
             test_item2_tv.setTextColor(Color.parseColor("#8a8a8a"));
             test_item2_tv.setBackgroundResource(R.drawable.huiseshangyuanjiao);
             textView13.setTextColor(Color.parseColor("#8a8a8a"));
@@ -636,7 +652,7 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
         header_tv4 = (TextView) findViewById(R.id.header_tv4);
         btn_dayin = (Button) findViewById(R.id.btn_dayin);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
-        stats_spinner = (Spinner) findViewById(R.id.stats_spinner);
+        stats_spinner = (TextView) findViewById(R.id.stats_spinner);
         stats_tv1 = (TextView) findViewById(R.id.stats_tv1);
         textView5 = (TextView) findViewById(R.id.textView5);
         textView6 = (TextView) findViewById(R.id.textView6);
@@ -683,6 +699,10 @@ public class QueryResult extends AppCompatActivity implements View.OnClickListen
 
         q13 = (LinearLayout) findViewById(R.id.q13);
         q1 = (TextView) findViewById(R.id.q1);
+        w1 = (AbsoluteLayout) findViewById(R.id.w1);
+        w2 = (AbsoluteLayout) findViewById(R.id.w2);
+        w3 = (AbsoluteLayout) findViewById(R.id.w3);
+        w4 = (AbsoluteLayout) findViewById(R.id.w4);
         q3 = (TextView) findViewById(R.id.q3);
         q2 = (TextView) findViewById(R.id.q2);
         q4 = (TextView) findViewById(R.id.q4);

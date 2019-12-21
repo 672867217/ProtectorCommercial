@@ -119,8 +119,8 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                         testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                         testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                        testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                        testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                        testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                        testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                         testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                         testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                         testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -132,24 +132,21 @@ public class DateQuery extends AppCompatActivity implements View.OnClickListener
                         testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                         testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                         app.map.put(new Utils().HexToInt(list.get(5))+"",testData);
+                        if(testData.getCecheng().equals("4")){
+                            testData.save();
+                        }
                 }
             }
         });
         new Utils().hideNavKey(DateQuery.this);
         SharedPreferences preferences = getSharedPreferences("cecheng",0);
-        cecheng = Integer.parseInt(preferences.getString("what","1"));
+        cecheng = Integer.parseInt(preferences.getString("what","0"));
         switch (cecheng) {
             case 0:
                 tv_cecheng.setText("其他");
                 break;
-            case 1:
-                tv_cecheng.setText("一测");
-                break;
-            case 2:
-                tv_cecheng.setText("二测");
-                break;
-            case 3:
-                tv_cecheng.setText("三测");
+            case 4:
+                tv_cecheng.setText("出所测");
                 break;
         }
 

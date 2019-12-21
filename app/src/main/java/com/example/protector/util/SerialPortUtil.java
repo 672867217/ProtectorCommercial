@@ -89,16 +89,15 @@ public class SerialPortUtil {
      *
      * @param data 要发送的数据
      */
-    public void sendSerialPort(String data) {
+    public void sendSerialPort(int data) {
         try {
-            byte[] sendData = data.getBytes();
-            outputStream.write(sendData);
+            System.out.println(data+".....");
+            outputStream.write(data);
             outputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public void getSerialPort() {
         if (mReceiveThread == null) {
 
@@ -143,7 +142,7 @@ public class SerialPortUtil {
                             }str2 = new StringBuffer();
                         }
                     };
-                    timer.schedule(timerTask,1000,2000);
+                    timer.schedule(timerTask,500,2000);
                 }
                 is = true;
                 byte[] readData = new byte[1024];
@@ -154,7 +153,7 @@ public class SerialPortUtil {
                     e.printStackTrace();
                 }
                 if (size > 0) {
-                    str = new String(readData).trim();
+                    str = new String(new Utils().ByteArrToHex(readData,0,size)).trim();
                     str2.append(str);
                 }
             }

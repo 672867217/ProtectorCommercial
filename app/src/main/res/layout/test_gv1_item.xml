@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="1024dp"
-    android:layout_height="768dp"
+    android:layout_height="603dp"
     android:gravity="center"
     android:orientation="vertical">
 
     <AbsoluteLayout
-        android:layout_width="139dp"
-        android:layout_height="144dp"
-        android:layout_x="439dp"
-        android:layout_y="56dp"
+        android:layout_width="167dp"
+        android:layout_height="143dp"
+        android:layout_x="663dp"
+        android:layout_y="76dp"
         android:background="@drawable/bg_ziseyuanjiao"
         android:orientation="vertical">
 
@@ -21,29 +21,30 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_x="0dp"
-            android:layout_y="9dp"
+            android:layout_y="0dp"
+            android:background="@drawable/fenseshangyuanjiao"
             android:gravity="center"
-            android:text="一测统计"
+            android:text="出所测试统计"
             android:textColor="#000000"
-            android:textSize="17sp" />
+            android:textSize="20sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="7dp"
-            android:layout_y="39dp"
-            android:text="测试数量  :  "
+            android:layout_x="14dp"
+            android:layout_y="34dp"
+            android:text="测试数量 :  "
             android:textColor="#000000"
-            android:textSize="13sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/test_item1_tv1"
-            android:layout_width="53dp"
-            android:layout_height="16dp"
-            android:layout_x="76dp"
-            android:layout_y="40dp"
-            android:background="@drawable/dialog_test2_2"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="89dp"
+            android:layout_y="36dp"
+            android:background="@drawable/bg_toumingyuanjiao"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -51,19 +52,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="8dp"
-            android:layout_y="62dp"
-            android:text="通过数量  :  "
+            android:layout_x="15dp"
+            android:layout_y="59dp"
+            android:text="通过数量 :  "
             android:textColor="#000000"
-            android:textSize="13sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/test_item1_tv2"
-            android:layout_width="53dp"
-            android:layout_height="16dp"
-            android:layout_x="77dp"
-            android:layout_y="64dp"
-            android:background="@drawable/dialog_test2_2"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="89dp"
+            android:layout_y="61dp"
+            android:background="@drawable/bg_toumingyuanjiao"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -72,19 +73,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="8dp"
-            android:layout_y="87dp"
-            android:text="未通过数  :  "
+            android:layout_x="14dp"
+            android:layout_y="85dp"
+            android:text="未通过数 :  "
             android:textColor="#000000"
-            android:textSize="13sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/test_item1_tv3"
-            android:layout_width="53dp"
-            android:layout_height="16dp"
-            android:layout_x="76dp"
-            android:layout_y="88dp"
-            android:background="@drawable/dialog_test2_2"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="89dp"
+            android:layout_y="85dp"
+            android:background="@drawable/bg_toumingyuanjiao"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />
@@ -93,19 +94,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="8dp"
+            android:layout_x="14dp"
             android:layout_y="111dp"
-            android:text="平均用时  :  "
+            android:text="平均用时 :  "
             android:textColor="#000000"
-            android:textSize="13sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/test_item1_tv4"
-            android:layout_width="53dp"
-            android:layout_height="16dp"
-            android:layout_x="77dp"
-            android:layout_y="113dp"
-            android:background="@drawable/dialog_test2_2"
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:layout_x="89dp"
+            android:layout_y="112dp"
+            android:background="@drawable/bg_toumingyuanjiao"
             android:gravity="center"
             android:textColor="#000000"
             android:textSize="13sp" />

@@ -1,10 +1,13 @@
 package com.example.protector;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +53,7 @@ import java.util.TimerTask;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Test extends AppCompatActivity implements View.OnClickListener {
+public class Test extends MyDialog implements View.OnClickListener {
 
     private TextView header_tv;
     private TextView header_tv2;
@@ -69,12 +72,12 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     private Spinner chanpin_spinner3;
     private Spinner chanpin_spinner;
     private TextView stats_tv1;
-    String[] sp_name = {"其他", "一测", "二测", "三测"};
-    String[] sp_save = {"自动", "手动"};
+    String[] sp_name = {"其他测试", "出所测试"};
     List sp_ceshi = new ArrayList();
+    List sp_bianhao = new ArrayList();
     List sp_chanpin = new ArrayList();
     List sp_shengchan = new ArrayList();
-    String[] gv1_name2 = {"一测", "二测", "三测", "其他"};
+    String[] gv1_name2 = {"出所测试统计", "其他测统计"};
     List<Bean> list1 = new ArrayList();
     List<TestData> list2 = new ArrayList();
     private List<XiuGai> list;
@@ -89,7 +92,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     BigDecimal b3 = new BigDecimal("0.01");
     BigDecimal b4 = new BigDecimal("0.1");
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    Map<String, Date> map = new HashMap<>();
     private int gonwei;
     private Handler handler;
     private Handler handler2;
@@ -99,38 +101,23 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     private Button duqu;
     private boolean is = false;
     private MyApplication app;
-
-    private String num2(String s) {
-        String ss = String.format("%08d", Integer.parseInt(Integer.toBinaryString(Integer.parseInt(s))));
-        if (ss.charAt(0) == '0') {
-            return "+" + jisuan2(s);
-        } else {
-            return "-" + jisuan2((Integer.parseInt(Integer.toBinaryString(~Integer.parseInt(s)).substring(24, 32), 2) + 1) + "");
-        }
-    }
-
-    private String num(String s) {
-        String ss = String.format("%08d", Integer.parseInt(Integer.toBinaryString(Integer.parseInt(s))));
-        if (ss.charAt(0) == '0') {
-            return "+" + jisuan3(s);
-        } else {
-            return "-" + jisuan3((Integer.parseInt(Integer.toBinaryString(~Integer.parseInt(s)).substring(24, 32), 2) + 1) + "");
-        }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+    Context mycontext;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    public Test(Context context, View layout, int style) {
+        super(context, layout, style);
+        mycontext = context;
         initView();
-        app = (MyApplication) getApplication();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mycontext);
+        editor = sharedPreferences.edit();
+        app = (MyApplication)mycontext.getApplicationContext();
         gonwei1 = DataSupport.find(Gonwei.class, 1);
-        View view = LayoutInflater.from(Test.this).inflate(R.layout.dialog_test5, null);
-        myDialog = new MyDialog(Test.this, view, R.style.dialog);
+        View view = LayoutInflater.from(mycontext).inflate(R.layout.dialog_test5, null);
+        myDialog = new MyDialog(mycontext, view, R.style.dialog);
         testDialog3Tv = (TextView) view.findViewById(R.id.test_dialog3_tv);
         testDialog3Img = (ImageView) view.findViewById(R.id.test_dialog3_img);
         testDialog3Btn = (Button) view.findViewById(R.id.test_dialog3_btn);
-        new Utils().hideNavKey(Test.this);
+        new Utils().hideNavKey(mycontext);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         stats_tv2.setText(dateFormat.format(new Date()));
         anniu = new ArrayList();
@@ -155,11 +142,23 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                             }
                         };
                         timer2.schedule(timerTask, 240000, 240000);
-                        map.put("gonwei" + gonwei, new Date());
                         break;
                     case "61":
-                        MainActivity.utils.sendSerialPort("AAFF00310064");
-                        chanpin_spinner3.setSelection(0, true);
+
+                        int[] arr = new int[]{0xaa,0xff,0x00,0x31,0x00,0x64};
+                        for (int j = 0; j < arr.length; j++) {
+                            MainActivity.utils.sendSerialPort(arr[j]);
+                        }
+                        if(!sharedPreferences.getBoolean("is",false)){
+                            cecheng = 0;
+                            for (int i = 0; i < 2; i++) {
+                                int[] arrr = cmd(i + 1);
+                                for (int j = 0; j < arrr.length; j++) {
+                                    MainActivity.utils.sendSerialPort(arrr[j]);
+                                }
+                            }
+                            editor.putBoolean("is",true).commit();
+                        }
                         List<String> strings = new Utils().getDivLines(String.format("%08d", Integer.parseInt(Integer.toBinaryString(new Utils().HexToInt(list.get(5))))), 1);
                         System.out.println(strings.toString());
                         if (DataSupport.findAll(Gonwei.class).size() == 0) {
@@ -169,9 +168,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         }
                         gonwei1.one = is(Integer.parseInt(strings.get(7)));
                         gonwei1.two = is(Integer.parseInt(strings.get(6)));
-                        gonwei1.three = is(Integer.parseInt(strings.get(5)));
-                        gonwei1.four = is(Integer.parseInt(strings.get(4)));
-                        gonwei1.five = is(Integer.parseInt(strings.get(3)));
                         gonwei1.save();
                         handler.sendEmptyMessage(2);
                         break;
@@ -180,14 +176,13 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                             timer2.cancel();
                         }
                         TestData testData = new TestData();
-                        testData.setMode(sp_save[type]);
                         testData.setType(1);
                         testData.setName(chanpin_spinner5.getSelectedItem() + "");
                         testData.setChanpinname(chanpin_spinner.getSelectedItem() + "");
                         testData.setShengchanchang(chanpin_spinner2.getSelectedItem() + "");
                         testData.setXinghao(stats_tv1.getText().toString());
                         testData.setGongwei(new Utils().HexToInt(list.get(5)) + "");
-                        testData.setDate(map.get("gonwei" + testData.getGongwei()));
+                        testData.setDate(new Date());
                         testData.setDate2(new Date());
                         testData.setCecheng(new Utils().HexToInt(list.get(6)) + "");
                         testData.setCeshishichang(new Utils().HexToInt(list.get(7) + list.get(8)) + "");
@@ -220,8 +215,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                         testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                         testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                        testData.setM13xianshishijian(jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                        testData.setM30xianshishijian(jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                        testData.setM13xianshishijian(jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                        testData.setM30xianshishijian(jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                         testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                         testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                         testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -232,7 +227,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         testData.setBxiangduixianquanjueyuan(new Utils().HexToInt(list.get(72) + list.get(73)) + "");
                         testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                         testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
-                        if (chanpin_spinner3.getSelectedItem().equals("其他")) {
+                        if (chanpin_spinner3.getSelectedItem().equals("其他测试")) {
                             app.map.put(new Utils().HexToInt(list.get(5)) + "", testData);
                         } else {
                             list2.set(Integer.parseInt(testData.getGongwei()) - 1, testData);
@@ -245,23 +240,20 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         });
 
         if (gonwei1 == null) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 2; i++) {
                 TestData testData = new TestData();
-                testData.setMode(sp_save[type]);
                 list2.add(testData);
             }
         } else {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 2; i++) {
                 switch (i) {
                     case 0:
                         if (gonwei1.one == true) {
                             TestData testData = new TestData();
-                            testData.setMode(sp_save[type]);
                             list2.add(testData);
                         } else {
                             TestData testData = new TestData();
                             testData.setShengchanbianma("");
-                            testData.setMode(sp_save[type]);
                             list2.add(testData);
                         }
 
@@ -269,48 +261,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                     case 1:
                         if (gonwei1.two == true) {
                             TestData testData = new TestData();
-                            testData.setMode(sp_save[type]);
                             list2.add(testData);
                         } else {
                             TestData testData = new TestData();
                             testData.setShengchanbianma("");
-                            testData.setMode(sp_save[type]);
-                            list2.add(testData);
-                        }
-                        break;
-                    case 2:
-                        if (gonwei1.three == true) {
-                            TestData testData = new TestData();
-                            testData.setMode(sp_save[type]);
-                            list2.add(testData);
-                        } else {
-                            TestData testData = new TestData();
-                            testData.setShengchanbianma("");
-                            testData.setMode(sp_save[type]);
-                            list2.add(testData);
-                        }
-                        break;
-                    case 3:
-                        if (gonwei1.four == true) {
-                            TestData testData = new TestData();
-                            testData.setMode(sp_save[type]);
-                            list2.add(testData);
-                        } else {
-                            TestData testData = new TestData();
-                            testData.setShengchanbianma("");
-                            testData.setMode(sp_save[type]);
-                            list2.add(testData);
-                        }
-                        break;
-                    case 4:
-                        if (gonwei1.five == true) {
-                            TestData testData = new TestData();
-                            testData.setMode(sp_save[type]);
-                            list2.add(testData);
-                        } else {
-                            TestData testData = new TestData();
-                            testData.setShengchanbianma("");
-                            testData.setMode(sp_save[type]);
                             list2.add(testData);
                         }
                         break;
@@ -318,7 +272,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             }
         }
 
-        testGv2ItemAdapter = new TestGv2ItemAdapter(this, list2);
+        testGv2ItemAdapter = new TestGv2ItemAdapter(mycontext, list2);
         test_gv2.setAdapter(testGv2ItemAdapter);
         final List<ProductType> types = DataSupport.findAll(ProductType.class);
         List<Operator> operators = DataSupport.findAll(Operator.class);
@@ -329,23 +283,23 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         }
         for (int i = 0; i < operators.size(); i++) {
             sp_ceshi.add(operators.get(i).getName());
+            sp_bianhao.add(operators.get(i).getNumber());
         }
-        ArrayAdapter nameAdapter = new ArrayAdapter(Test.this, R.layout.spinner, sp_name);
-        ArrayAdapter ceshiAdapter = new ArrayAdapter(Test.this, R.layout.spinner, sp_ceshi);
-        ArrayAdapter chanpinAdapter = new ArrayAdapter(Test.this, R.layout.spinner, sp_chanpin);
-        ArrayAdapter saveAdapter = new ArrayAdapter(Test.this, R.layout.spinner, sp_save);
+        ArrayAdapter nameAdapter = new ArrayAdapter(mycontext, R.layout.spinner, sp_name);
+        ArrayAdapter ceshiAdapter = new ArrayAdapter(mycontext, R.layout.spinner, sp_ceshi);
+        ArrayAdapter chanpinAdapter = new ArrayAdapter(mycontext, R.layout.spinner, sp_chanpin);
+        ArrayAdapter bianhao = new ArrayAdapter(mycontext, R.layout.spinner, sp_bianhao);
 
         chanpin_spinner.setAdapter(chanpinAdapter);
-
         chanpin_spinner3.setAdapter(nameAdapter);
-        chanpin_spinner4.setAdapter(saveAdapter);
         chanpin_spinner5.setAdapter(ceshiAdapter);
+        chanpin_spinner4.setAdapter(bianhao);
         chanpin_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (types.size() != 0) {
                     stats_tv1.setText(types.get(i).getXinghao());
-                    ArrayAdapter shengchanAdapter = new ArrayAdapter(Test.this, R.layout.spinner, new String[]{sp_shengchan.get(i) + ""});
+                    ArrayAdapter shengchanAdapter = new ArrayAdapter(mycontext, R.layout.spinner, new String[]{sp_shengchan.get(i) + ""});
                     chanpin_spinner2.setAdapter(shengchanAdapter);
                 }
             }
@@ -358,12 +312,21 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         chanpin_spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cecheng = position;
+               if(position == 0){
+                   cecheng = 0;
+               }else
+               {
+                   cecheng = 4;
+               }
                 test_gv2.setAdapter(testGv2ItemAdapter);
                 //当测程改变  通过串口向测试台主机发送信息
                 if (is) {
-                    for (int i = 0; i < 5; i++) {
-                        MainActivity.utils.sendSerialPort(cmd(i + 1));
+                    for (int i = 0; i < 2; i++) {
+                        int[] arr = cmd(i + 1);
+                        for (int j = 0; j < arr.length; j++) {
+                            MainActivity.utils.sendSerialPort(arr[j]);
+                        }
+
                     }
                 } else {
                     is = true;
@@ -376,36 +339,17 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
             }
         });
-        chanpin_spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = position;
-                for (int i = 0; i < list2.size(); i++) {
-                    TestData testData = list2.get(i);
-                    if (testData.getSave() == 0) {
-                        testData.setMode(sp_save[type]);
-                    }
-
-                }
-                testGv2ItemAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         //如果是新班次
-        int what = getIntent().getIntExtra("what", -1);
+        int what =MainActivity.ini;
         if (what == 1) {
-            for (int i = 0; i < 4; i++) {
-                TestData testData = new TestData();
-                testData.setType(1);
-                testData.updateAll("type = ?", "0");
+            for (int i = 0; i < 2; i++) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("type",0);
+                DataSupport.updateAll(TestData.class,contentValues);
                 Bean bean = new Bean();
-                bean.ceshi = String.valueOf(0);
-                bean.tongguo = String.valueOf(0);
-                bean.weitongguo = String.valueOf(0);
+                bean.ceshi = "0";
+                bean.tongguo = "0";
+                bean.weitongguo = "0";
                 bean.yongshi = "0";
                 list1.add(bean);
             }
@@ -415,33 +359,35 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             chanpin_spinner4.setSelection(app.type, true);
             chanpin_spinner5.setSelection(app.name, true);
             final List<TestData> dataList = DataSupport.findAll(TestData.class);
-            for (int i = 1; i < 5; i++) {
-                int shuliang = 0, zongshijian = 0;
-                String num = String.valueOf(i);
-                if (i == 4) {
-                    // num = 0 的时候 为其他测程
-                    num = 0 + "";
+            for (int i = 0; i < 2; i++) {
+                int shuliang = 0, zongshijian = 0,tongguo = 0,weitongguo = 0;
+                int a = 4;
+                if(i == 1){
+                    a = 0;
                 }
                 for (int j = 0; j < dataList.size(); j++) {
-                    //遍历数据库数据 如果测程等于1 数量增加;
-                    if (dataList.get(j).getType() == 1) {
-                        if (dataList.get(j).getCecheng().equals(num)) {
-                            shuliang++;
-                            zongshijian = Integer.parseInt(dataList.get(j).getCeshishichang());
+                    if(dataList.get(j).getType() == 1 && dataList.get(j).getCecheng().equals(a+"")){
+                        shuliang++;
+                        zongshijian = Integer.parseInt(dataList.get(j).getCeshishichang());
+                        if(dataList.get(j).getTongguo().equals("合格")){
+                            tongguo++;
+                        }else
+                        {
+                            weitongguo++;
                         }
                     }
                 }
                 Bean bean = new Bean();
                 bean.ceshi = String.valueOf(shuliang);
-                bean.tongguo = String.valueOf(shuliang);
-                bean.weitongguo = String.valueOf(shuliang);
+                bean.tongguo = String.valueOf(tongguo);
+                bean.weitongguo = String.valueOf(weitongguo);
                 bean.yongshi = zongshijian / 60 + "'" + zongshijian % 60 + "\"";
                 list1.add(bean);
             }
         }
 
 
-        testGv1ItemAdapter = new TestGv1ItemAdapter(this, list1);
+        testGv1ItemAdapter = new TestGv1ItemAdapter(mycontext, list1);
         test_gv1.setAdapter(testGv1ItemAdapter);
 
         handler = new Handler() {
@@ -461,7 +407,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         testDialog3Img.setImageResource(R.drawable.baozhi2);
                         break;
                     case 2:
-                        testGv2ItemAdapter = new TestGv2ItemAdapter(getApplicationContext(), list2);
+                        testGv2ItemAdapter = new TestGv2ItemAdapter(mycontext, list2);
                         test_gv2.setAdapter(testGv2ItemAdapter);
                         break;
                     case 3:
@@ -480,10 +426,31 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             }
         };
         if (gonwei1 == null) {
-            MainActivity.utils.sendSerialPort("AAFF00300065");
+            int[] arr = new int[]{0xaa,0xff,0x00,0x30,0x00,0x65};
+            for (int i = 0; i < arr.length; i++) {
+                MainActivity.utils.sendSerialPort(arr[i]);
+            }
         }
-
     }
+
+    private String num2(String s) {
+        String ss = String.format("%08d", Integer.parseInt(Integer.toBinaryString(Integer.parseInt(s))));
+        if (ss.charAt(0) == '0') {
+            return "+" + jisuan2(s);
+        } else {
+            return "-" + jisuan2((Integer.parseInt(Integer.toBinaryString(~Integer.parseInt(s)).substring(24, 32), 2) + 1) + "");
+        }
+    }
+
+    private String num(String s) {
+        String ss = String.format("%08d", Integer.parseInt(Integer.toBinaryString(Integer.parseInt(s))));
+        if (ss.charAt(0) == '0') {
+            return "+" + jisuan3(s);
+        } else {
+            return "-" + jisuan3((Integer.parseInt(Integer.toBinaryString(~Integer.parseInt(s)).substring(24, 32), 2) + 1) + "");
+        }
+    }
+
 
     private boolean is(int num) {
         if (num == 0) {
@@ -534,19 +501,23 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.test_btn:
-                finish();
                 app.scname = chanpin_spinner.getSelectedItemPosition();
                 app.name = chanpin_spinner5.getSelectedItemPosition();
                 app.cecheng = chanpin_spinner3.getSelectedItemPosition();
                 app.type = chanpin_spinner4.getSelectedItemPosition();
+                dismiss();
                 break;
             case R.id.duqu:
-                MainActivity.utils.sendSerialPort("AAFF00300065");
+                int[] arr = new int[]{0xaa,0xff,0x00,0x30,0x00,0x65};
+                for (int i = 0; i < arr.length; i++) {
+                    MainActivity.utils.sendSerialPort(arr[i]);
+                }
+
                 break;
         }
     }
 
-    private String cmd(int gongwei) {
+    public int[] cmd(int gongwei) {
         XiuGai xiuGai = list.get(gongwei - 1);
         String s = "AAFF005119";
         if (Integer.toHexString(gongwei).length() == 2) {
@@ -647,12 +618,14 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         } else {
             s += "0" + Integer.toHexString((int) (Float.parseFloat(xiuGai.getXianquan())));
         }
-        if (new Utils().getXor(new Utils().getDivLines(s, 2)).length() < 2) {
-            s += "0" + new Utils().getXor(new Utils().getDivLines(s, 2));
-        } else {
-            s += new Utils().getXor(new Utils().getDivLines(s, 2));
+        int[] arr = new int[31];
+        List list = new Utils().getDivLines(s,2);
+        System.out.println(list.size()+"///////");
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = 0x00+Integer.parseInt((String) list.get(i),16);
         }
-        return s;
+        arr[list.size()] = new Utils().getXor(new Utils().getDivLines(s, 2));
+        return arr;
     }
 
     class Bean {
@@ -725,6 +698,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+
     public class TestGv2ItemAdapter extends BaseAdapter {
 
         private List<TestData> objects = new ArrayList();
@@ -732,10 +706,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         private Context context;
         private LayoutInflater layoutInflater;
 
-        public TestGv2ItemAdapter(Context context, List<TestData> objects) {
+        public TestGv2ItemAdapter(Context context,List list) {
             this.context = context;
-            this.objects = objects;
             this.layoutInflater = LayoutInflater.from(context);
+            this.objects = list;
         }
 
         @Override
@@ -759,13 +733,12 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 convertView = layoutInflater.inflate(R.layout.test_gv2_item, null);
                 convertView.setTag(new ViewHolder(convertView));
             }
-            initializeViews(getItem(position), (ViewHolder) convertView.getTag(), position);
+            initializeViews((TestData)getItem(position), (ViewHolder) convertView.getTag(),position);
             return convertView;
         }
 
-        private void initializeViews(final TestData testData, final ViewHolder holder, final int what) {
-            //TODO implement
-
+        private void initializeViews(TestData testData, final ViewHolder holder, final int what) {
+            holder.testItem2Tv2.setEnabled(false);
             holder.testItem2Tv7.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv8.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv9.setBackgroundResource(R.drawable.dialog_test2_22);
@@ -775,7 +748,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv13.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv15.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv17.setBackgroundResource(R.drawable.dialog_test2_22);
-            if (chanpin_spinner3.getSelectedItem().equals("其他")) {
+            if (chanpin_spinner3.getSelectedItem().equals("其他测试")) {
                 TestData t;
                 if (app.map.get((what + 1) + "") != null) {
                     t = app.map.get((what + 1) + "");
@@ -783,15 +756,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                     return;
                 }
 
-            }
-            holder.testItem2Tv2.setEnabled(true);
-            for (int i = 0; i < anniu.size(); i++) {
-                if (anniu.get(i).equals(what + 1)) {
-                    holder.testBtn2.setEnabled(false);
-                    holder.testBtn4.setEnabled(true);
-                    holder.testBtn2.setBackgroundResource(R.drawable.queding);
-                    holder.testBtn4.setBackgroundResource(R.drawable.dayinweixiuqindan);
-                }
             }
             handler2 = new Handler() {
                 @Override
@@ -812,7 +776,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 }
             };
             holder.testItem2Tv.setText("工位" + (what + 1));
-            holder.testItem2Tv1.setText(testData.getMode());
             holder.testItem2Tv2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
@@ -826,21 +789,22 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
                         if (holder.testItem2Tv2.getText().toString().equals("")) {
-                            Toast.makeText(Test.this, "请输入生产编号", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mycontext, "请输入生产编号", Toast.LENGTH_SHORT).show();
                         } else {
                             if (anniu.size() != 0) {
                                 anniu.remove(gonwei + "");
                             }
                             shengchanbianma = holder.testItem2Tv2.getText().toString();
                             holder.testItem2Tv2.clearFocus();
-                            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            InputMethodManager im = (InputMethodManager) mycontext.getSystemService(Context.INPUT_METHOD_SERVICE);
                             im.hideSoftInputFromWindow(holder.testItem2Tv2.getWindowToken(), 0);
                             gonwei = 1 + what;
-                            String s = Integer.toHexString(Integer.parseInt(holder.testItem2Tv2.getText().toString()));
-                            if (s.length() < 8) {
-                                s = "0" + s;
+                            int s = Integer.parseInt(holder.testItem2Tv2.getText().toString(),16);
+                            int aa = new Utils().getXor(new Utils().getDivLines("AAFF0020050" + gonwei + s, 2));
+                            int[] arr = new int[]{0xaa,0xff,0x00,0x20,0x05,0x00+gonwei,0x00+s,0x00+aa};
+                            for (int i = 0; i < arr.length; i++) {
+                                MainActivity.utils.sendSerialPort(arr[i]);
                             }
-                            MainActivity.utils.sendSerialPort("AAFF0020050" + gonwei + s + new Utils().getXor(new Utils().getDivLines("AAFF0020050" + gonwei + s, 2)));
                             holder.testItem2Tv2.setEnabled(false);
                             timer = new Timer();
                             TimerTask timerTask = new TimerTask() {
@@ -861,11 +825,10 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             });
             holder.testItem2Tv2.setText(testData.getShengchanbianma());
             holder.testItem2Tv3.setText(testData.getChanpinbianma());
-            holder.testItem2Tv4.setText(testData.getCecheng());
             if (Integer.parseInt(testData.getCeshishichang()) < 60) {
-                holder.testItem2Tv5.setText(testData.getCeshishichang() + "s");
+                holder.testItem2Tv4.setText(testData.getCeshishichang() + "s");
             } else {
-                holder.testItem2Tv5.setText(Integer.parseInt(testData.getCeshishichang()) / 60 + "'"
+                holder.testItem2Tv4.setText(Integer.parseInt(testData.getCeshishichang()) / 60 + "'"
                         + Integer.parseInt(testData.getCeshishichang()) % 60 + "\"");
             }
             //测试结果
@@ -915,21 +878,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         break;
                     case 1:
                         if (!gonwei1.two) {
-                            set(holder);
-                        }
-                        break;
-                    case 2:
-                        if (!gonwei1.three) {
-                            set(holder);
-                        }
-                        break;
-                    case 3:
-                        if (!gonwei1.four) {
-                            set(holder);
-                        }
-                        break;
-                    case 4:
-                        if (!gonwei1.five) {
                             set(holder);
                         }
                         break;
@@ -1035,17 +983,11 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 }
                 //保存模式为自动不可用 手动可用
                 testData.setTongguo(holder.testItem2Tv17.getText().toString());
-                if (type == 0 && !chanpin_spinner3.getSelectedItem().equals("其他") && testData.getSave() == 0) {
-                    if (!anniu.contains(gonwei)) {
-                        anniu.add(gonwei);
-                    }
-
-                    holder.testBtn2.setEnabled(false);
+                if (!chanpin_spinner3.getSelectedItem().equals("其他")) {
                     holder.testBtn4.setEnabled(true);
-                    holder.testBtn2.setBackgroundResource(R.drawable.queding);
                     holder.testBtn4.setBackgroundResource(R.drawable.dayinweixiuqindan);
-                    View view = LayoutInflater.from(Test.this).inflate(R.layout.dialog_test4, null);
-                    final MyDialog dialog = new MyDialog(Test.this, view, R.style.dialog);
+                    View view = LayoutInflater.from(mycontext).inflate(R.layout.dialog_test4, null);
+                    final MyDialog dialog = new MyDialog(mycontext, view, R.style.dialog);
                     dialog.show();
                     testData.setSave(1);
                     testData.save();
@@ -1058,43 +1000,7 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         }
                     };
                     timer.schedule(timerTask, 1000, 200);
-                } else {
-                    if (testData.getSave() == 1) {
-                        holder.testBtn2.setBackgroundResource(R.drawable.queding);
-                        holder.testBtn2.setEnabled(false);
-                        holder.testBtn4.setEnabled(true);
-                        holder.testBtn4.setBackgroundResource(R.drawable.dayinweixiuqindan);
-                    } else {
-                        holder.testBtn2.setBackgroundResource(R.drawable.baocun);
-                        holder.testBtn2.setEnabled(true);
-                    }
                 }
-                //点击保存弹出dialog 1秒后自动关闭
-                holder.testBtn2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!anniu.contains(gonwei)) {
-                            anniu.add(gonwei);
-                        }
-                        holder.testBtn2.setEnabled(false);
-                        holder.testBtn4.setEnabled(true);
-                        holder.testBtn2.setBackgroundResource(R.drawable.queding);
-                        holder.testBtn4.setBackgroundResource(R.drawable.dayinweixiuqindan);
-                        View view = LayoutInflater.from(Test.this).inflate(R.layout.dialog_test4, null);
-                        final MyDialog dialog = new MyDialog(Test.this, view, R.style.dialog);
-                        dialog.show();
-                        final Timer timer = new Timer();
-                        TimerTask timerTask = new TimerTask() {
-                            @Override
-                            public void run() {
-                                testData.save();
-                                dialog.dismiss();
-                                timer.cancel();
-                            }
-                        };
-                        timer.schedule(timerTask, 1000, 200);
-                    }
-                });
             }
 
 
@@ -1285,14 +1191,12 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
 
         private void setContext(final ViewHolder holder, TestData testData, final int what) {
             holder.testItem2Tv.setText("工位" + (what + 1));
-            holder.testItem2Tv1.setText("");
             holder.testItem2Tv2.setText("0");
             holder.testItem2Tv3.setText("0");
-            holder.testItem2Tv4.setText("其他");
             if (Integer.parseInt(testData.getCeshishichang()) < 60) {
-                holder.testItem2Tv5.setText(testData.getCeshishichang() + "s");
+                holder.testItem2Tv4.setText(testData.getCeshishichang() + "s");
             } else {
-                holder.testItem2Tv5.setText(Integer.parseInt(testData.getCeshishichang()) / 60 + "'"
+                holder.testItem2Tv4.setText(Integer.parseInt(testData.getCeshishichang()) / 60 + "'"
                         + Integer.parseInt(testData.getCeshishichang()) % 60 + "\"");
             }
             //测试结果
@@ -1342,21 +1246,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                         break;
                     case 1:
                         if (!gonwei1.two) {
-                            set(holder);
-                        }
-                        break;
-                    case 2:
-                        if (!gonwei1.three) {
-                            set(holder);
-                        }
-                        break;
-                    case 3:
-                        if (!gonwei1.four) {
-                            set(holder);
-                        }
-                        break;
-                    case 4:
-                        if (!gonwei1.five) {
                             set(holder);
                         }
                         break;
@@ -1460,11 +1349,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                     holder.testBtn4.setEnabled(false);
                     holder.testBtn4.setBackgroundResource(R.drawable.queding);
                 }
-                holder.testItem2Tv17.setBackgroundResource(R.drawable.dialog_test2_3);
-                holder.testBtn2.setEnabled(false);
-                holder.testBtn4.setEnabled(false);
-                holder.testBtn4.setBackgroundResource(R.drawable.queding);
-                holder.testBtn2.setBackgroundResource(R.drawable.queding);
             }
         }
 
@@ -1478,39 +1362,29 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         }
 
         private void set2(ViewHolder holder) {
-            holder.testBtn2.setBackgroundResource(R.drawable.queding);
             holder.testBtn4.setBackgroundResource(R.drawable.queding);
-            holder.testBtn2.setEnabled(false);
-            holder.testBtn2.setTextColor(Color.parseColor("#868686"));
             holder.testBtn4.setEnabled(false);
             holder.testBtn4.setTextColor(Color.parseColor("#868686"));
             holder.testItem2Tv2.setEnabled(false);
-            holder.testItem2Tv1.setTextColor(Color.parseColor("#868686"));
-            holder.testItem2Tv1.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv2.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv3.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv2.setTextColor(Color.parseColor("#868686"));
             holder.testItem2Tv3.setTextColor(Color.parseColor("#868686"));
-            holder.t1.setTextColor(Color.parseColor("#868686"));
             holder.t2.setTextColor(Color.parseColor("#868686"));
             holder.t3.setTextColor(Color.parseColor("#868686"));
-            holder.testItem2Tv1.setText("");
             holder.testItem2Tv2.setText("0");
             holder.testItem2Tv3.setText("0");
         }
 
         private void set(ViewHolder holder) {
-            holder.testBtn2.setBackgroundResource(R.drawable.queding);
             holder.testBtn4.setBackgroundResource(R.drawable.queding);
             holder.testItem2Tv.setBackgroundResource(R.drawable.huiseshangyuanjiao);
             holder.testItem2Tv2.setEnabled(false);
             holder.testItem2Tv2.setBackgroundResource(R.drawable.dialog_test2_22);
             holder.testItem2Tv2.setTextColor(Color.parseColor("#868686"));
             holder.testItem2Tv.setTextColor(Color.parseColor("#868686"));
-            holder.t1.setTextColor(Color.parseColor("#868686"));
             holder.t2.setTextColor(Color.parseColor("#868686"));
             holder.t3.setTextColor(Color.parseColor("#868686"));
-            holder.t4.setTextColor(Color.parseColor("#868686"));
             holder.t5.setTextColor(Color.parseColor("#868686"));
             holder.t6.setTextColor(Color.parseColor("#868686"));
             holder.t7.setTextColor(Color.parseColor("#868686"));
@@ -1530,11 +1404,9 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.t21.setTextColor(Color.parseColor("#868686"));
             holder.t22.setTextColor(Color.parseColor("#868686"));
             holder.t23.setTextColor(Color.parseColor("#868686"));
-            holder.testItem2Tv1.setText("");
             holder.testItem2Tv2.setText("");
             holder.testItem2Tv3.setText("");
             holder.testItem2Tv4.setText("");
-            holder.testItem2Tv5.setText("");
             holder.testItem2Tv7.setText("");
             holder.testItem2Tv8.setText("");
             holder.testItem2Tv9.setText("");
@@ -1545,8 +1417,6 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             holder.testItem2Tv15.setText("");
             holder.testItem2Tv17.setText("");
             holder.textView27.setTextColor(Color.parseColor("#868686"));
-            holder.testBtn2.setEnabled(false);
-            holder.testBtn2.setTextColor(Color.parseColor("#868686"));
             holder.testBtn4.setEnabled(false);
             holder.testBtn4.setTextColor(Color.parseColor("#868686"));
         }
@@ -1554,16 +1424,12 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
         protected class ViewHolder {
             private LinearLayout gv2Layout;
             private TextView testItem2Tv;
-            private TextView t1;
-            private TextView testItem2Tv1;
             private TextView t2;
             private EditText testItem2Tv2;
             private TextView t3;
             private TextView testItem2Tv3;
-            private TextView t4;
             private TextView testItem2Tv4;
             private TextView t5;
-            private TextView testItem2Tv5;
             private TextView t6;
             private TextView t7;
             private TextView testItem2Tv7;
@@ -1592,22 +1458,17 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
             private TextView t23;
             private TextView testItem2Tv17;
             private Button testBtn4;
-            private Button testBtn2;
             private TextView textView27;
 
             public ViewHolder(View view) {
                 gv2Layout = (LinearLayout) view.findViewById(R.id.gv2_layout);
                 testItem2Tv = (TextView) view.findViewById(R.id.test_item2_tv);
-                t1 = (TextView) view.findViewById(R.id.t1);
-                testItem2Tv1 = (TextView) view.findViewById(R.id.test_item2_tv1);
                 t2 = (TextView) view.findViewById(R.id.t2);
                 testItem2Tv2 = (EditText) view.findViewById(R.id.test_item2_tv2);
                 t3 = (TextView) view.findViewById(R.id.t3);
                 testItem2Tv3 = (TextView) view.findViewById(R.id.test_item2_tv3);
-                t4 = (TextView) view.findViewById(R.id.t4);
                 testItem2Tv4 = (TextView) view.findViewById(R.id.test_item2_tv4);
                 t5 = (TextView) view.findViewById(R.id.t5);
-                testItem2Tv5 = (TextView) view.findViewById(R.id.test_item2_tv5);
                 t6 = (TextView) view.findViewById(R.id.t6);
                 t7 = (TextView) view.findViewById(R.id.t7);
                 testItem2Tv7 = (TextView) view.findViewById(R.id.test_item2_tv7);
@@ -1636,10 +1497,8 @@ public class Test extends AppCompatActivity implements View.OnClickListener {
                 t23 = (TextView) view.findViewById(R.id.t23);
                 testItem2Tv17 = (TextView) view.findViewById(R.id.test_item2_tv17);
                 testBtn4 = (Button) view.findViewById(R.id.test_btn4);
-                testBtn2 = (Button) view.findViewById(R.id.test_btn2);
                 textView27 = (TextView) view.findViewById(R.id.textView27);
             }
         }
     }
-
 }

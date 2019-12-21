@@ -133,8 +133,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                     testData.setAduanxiangxiangying(new Utils().HexToInt(list.get(48) + list.get(49)) + "");
                     testData.setBduanxiangxiangying(new Utils().HexToInt(list.get(50) + list.get(51)) + "");
                     testData.setCduanxiangxiangying(new Utils().HexToInt(list.get(52) + list.get(53)) + "");
-                    testData.setM13xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
-                    testData.setM30xianshishijian(MainActivity.jisuan2(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
+                    testData.setM13xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(54) + list.get(55)) + ""));
+                    testData.setM30xianshishijian(MainActivity.jisuan(new Utils().HexToInt(list.get(56) + list.get(57)) + ""));
                     testData.setAbxiangjianjueyuan(new Utils().HexToInt(list.get(58) + list.get(59)) + "");
                     testData.setAcxiangjianjueyuan(new Utils().HexToInt(list.get(60) + list.get(61)) + "");
                     testData.setBcxiangjianjueyuan(new Utils().HexToInt(list.get(62) + list.get(63)) + "");
@@ -146,6 +146,9 @@ public class ErrorAnalysis extends AppCompatActivity {
                     testData.setCxiangduixianquanjeuyuan(new Utils().HexToInt(list.get(74) + list.get(75)) + "");
                     testData.setXianquanduidijueyuan(new Utils().HexToInt(list.get(76) + list.get(77)) + "");
                     app.map.put(new Utils().HexToInt(list.get(5)) + "", testData);
+                    if(testData.getCecheng().equals("4")){
+                        testData.save();
+                    }
                 }
             }
         });
@@ -160,9 +163,6 @@ public class ErrorAnalysis extends AppCompatActivity {
         });
         list = new ArrayList();
         list2 = new ArrayList();
-        list.add(new Particular2());
-        list.add(new Particular2());
-        list.add(new Particular2());
         list.add(new Particular2());
         list.add(new Particular2());
         init();
@@ -352,8 +352,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                             break;
                     }
                 }
-                for (int i = 0; i < 5; i++) {
-                    String[] data = new String[14];
+                for (int i = 0; i < 2; i++) {
+                    String[] data = new String[12];
                     switch (i) {
                         case 0:
                             if (!gongweiList1.isEmpty()) {
@@ -363,21 +363,6 @@ public class ErrorAnalysis extends AppCompatActivity {
                         case 1:
                             if (!gongweiList2.isEmpty()) {
                                 data = Wucha(gongweiList2, 2);
-                            }
-                            break;
-                        case 2:
-                            if (!gongweiList3.isEmpty()) {
-                                data = Wucha(gongweiList3, 3);
-                            }
-                            break;
-                        case 3:
-                            if (!gongweiList4.isEmpty()) {
-                                data = Wucha(gongweiList4, 4);
-                            }
-                            break;
-                        case 4:
-                            if (!gongweiList5.isEmpty()) {
-                                data = Wucha(gongweiList5, 5);
                             }
                             break;
                     }
@@ -393,10 +378,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                     particular2.m13 = data[7];
                     particular2.m30 = data[8];
                     particular2.ceshi1 = data[9];
-                    particular2.ceshi2 = data[10];
-                    particular2.ceshi3 = data[11];
-                    particular2.qita = data[12];
-                    particular2.heji = data[13];
+                    particular2.qita = data[10];
+                    particular2.heji = data[11];
                     list.add(particular2);
                 }
                 adapter.notifyDataSetChanged();
@@ -442,7 +425,7 @@ public class ErrorAnalysis extends AppCompatActivity {
         String duanxiang;
         String m13;
         String m30;
-        String ceshi1, ceshi2, ceshi3, qita, heji;
+        String ceshi1, qita, heji;
     }
 
     class Particular {
@@ -493,14 +476,8 @@ public class ErrorAnalysis extends AppCompatActivity {
                 case "0":
                     d++;
                     break;
-                case "1":
+                case "4":
                     a++;
-                    break;
-                case "2":
-                    b++;
-                    break;
-                case "3":
-                    c++;
                     break;
             }
         }
@@ -525,10 +502,8 @@ public class ErrorAnalysis extends AppCompatActivity {
         data[7] = list8.get(0) + "";
         data[8] = list9.get(0) + "";
         data[9] = a + "";
-        data[10] = b + "";
-        data[11] = c + "";
-        data[12] = d + "";
-        data[13] = testDataList.size() + "";
+        data[10] = d + "";
+        data[11] = testDataList.size() + "";
         return data;
     }
 
@@ -655,9 +630,7 @@ public class ErrorAnalysis extends AppCompatActivity {
                     holder.itemTv9.setText((int) (Double.parseDouble(particular2.m30) - 30000) + "");
                 }
                 holder.itemTv10.setText(particular2.ceshi1);
-                holder.itemTv11.setText(particular2.ceshi2);
-                holder.itemTv12.setText(particular2.ceshi3);
-                holder.itemTv13.setText(particular2.qita);
+                holder.itemTv11.setText(particular2.qita);
                 holder.itemTv14.setText(particular2.heji);
                 holder.itemBtn.setBackgroundResource(R.drawable.xiangxixinxi);
                 holder.itemBtn.setEnabled(true);
@@ -752,8 +725,6 @@ public class ErrorAnalysis extends AppCompatActivity {
             private TextView itemTv9;
             private TextView itemTv10;
             private TextView itemTv11;
-            private TextView itemTv12;
-            private TextView itemTv13;
             private TextView itemTv14;
             private Button itemBtn;
 
@@ -770,8 +741,6 @@ public class ErrorAnalysis extends AppCompatActivity {
                 itemTv9 = (TextView) view.findViewById(R.id.item_tv9);
                 itemTv10 = (TextView) view.findViewById(R.id.item_tv10);
                 itemTv11 = (TextView) view.findViewById(R.id.item_tv11);
-                itemTv12 = (TextView) view.findViewById(R.id.item_tv12);
-                itemTv13 = (TextView) view.findViewById(R.id.item_tv13);
                 itemTv14 = (TextView) view.findViewById(R.id.item_tv14);
                 itemBtn = (Button) view.findViewById(R.id.item_btn);
             }

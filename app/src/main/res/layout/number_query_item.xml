@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="1024dp"
-    android:layout_height="768dp"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="1024dp"
+    android:layout_height="618dp"
     android:layout_marginRight="43dp"
     android:gravity="center|top"
     android:orientation="vertical">
 
     <AbsoluteLayout
-        android:layout_width="244dp"
-        android:layout_height="612dp"
-        android:layout_x="11dp"
-        android:layout_y="128dp">
+        android:layout_width="492dp"
+        android:layout_height="427dp"
+        android:layout_x="15dp"
+        android:layout_y="132dp"
+        android:background="@drawable/bg_lvlan">
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="583dp"
-            android:layout_x="0dp"
-            android:layout_y="28dp"
-            android:background="@drawable/bg_huisebiankuang"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="38dp">
+            android:layout_width="464dp"
+            android:layout_height="79dp"
+            android:layout_x="15dp"
+            android:layout_y="89dp"
+            android:background="@drawable/bg_newlan"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="48dp">
 
         </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="464dp"
+            android:layout_height="137dp"
+            android:layout_x="14dp"
+            android:layout_y="215dp"
+            android:background="@drawable/bg_newlan"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="48dp">
+
+        </FrameLayout>
+
         <TextView
             android:id="@+id/item1_title"
             android:layout_width="match_parent"
-            android:layout_height="47dp"
+            android:layout_height="40dp"
             android:layout_y="0dp"
             android:background="@drawable/fenseshangyuanjiao"
             android:gravity="center"
-            android:text="一测"
+            android:text="出所测"
             android:textColor="#000000"
             android:textSize="30sp" />
 
@@ -38,399 +51,350 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="63dp"
+            android:layout_x="40dp"
+            android:layout_y="100dp"
             android:text="测试工位  :  "
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv1"
-            android:layout_width="120dp"
+            android:layout_width="106dp"
             android:layout_height="20dp"
-            android:layout_x="96dp"
-            android:layout_y="62dp"
+            android:layout_x="132dp"
+            android:layout_y="103dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="93dp"
+            android:layout_x="40dp"
+            android:layout_y="129dp"
             android:text="测试日期  :  "
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv2"
             android:layout_width="120dp"
             android:layout_height="20dp"
-            android:layout_x="96dp"
-            android:layout_y="93dp"
-            android:background="@drawable/dialog_test2_22"
+            android:layout_x="131dp"
+            android:layout_y="129dp"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="123dp"
+            android:layout_x="270dp"
+            android:layout_y="102dp"
             android:text="完成时间  :  "
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv3"
-            android:layout_width="120dp"
+            android:layout_width="98dp"
             android:layout_height="20dp"
-            android:layout_x="96dp"
-            android:layout_y="123dp"
+            android:layout_x="352dp"
+            android:layout_y="103dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="152dp"
+            android:layout_x="270dp"
+            android:layout_y="128dp"
             android:text="测试人员  :  "
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv4"
-            android:layout_width="120dp"
+            android:layout_width="98dp"
             android:layout_height="20dp"
-            android:layout_x="96dp"
-            android:layout_y="153dp"
+            android:layout_x="352dp"
+            android:layout_y="129dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
-
-        <View
-            android:layout_width="210dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_x="16dp"
-            android:layout_y="191dp"
-            android:background="#c5c5c5" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_x="0dp"
-            android:layout_y="201dp"
+            android:layout_y="178dp"
             android:text="测试结果"
             android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="23sp" />
+            android:textSize="18sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="14dp"
-            android:layout_y="244dp"
+            android:layout_x="29dp"
+            android:layout_y="233dp"
             android:text="启动响应时间:"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv5"
             android:layout_width="72dp"
             android:layout_height="20dp"
-            android:layout_x="124dp"
-            android:layout_y="245dp"
+            android:layout_x="139dp"
+            android:layout_y="229dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_x="200dp"
-            android:layout_y="243dp"
+            android:layout_x="216dp"
+            android:layout_y="228dp"
             android:text="ms"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="274dp"
+            android:layout_x="29dp"
+            android:layout_y="256dp"
             android:text="断相响应时间:"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv6"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
-            android:layout_x="124dp"
-            android:layout_y="272dp"
+            android:layout_x="139dp"
+            android:layout_y="256dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:layout_x="200dp"
-            android:layout_y="271dp"
+            android:layout_x="215dp"
+            android:layout_y="255dp"
             android:text="ms"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="303dp"
+            android:layout_x="29dp"
+            android:layout_y="286dp"
             android:text="13秒限时时间:"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv7"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
-            android:layout_x="124dp"
-            android:layout_y="303dp"
+            android:layout_x="139dp"
+            android:layout_y="285dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_x="200dp"
-            android:layout_y="301dp"
+            android:layout_x="216dp"
+            android:layout_y="281dp"
             android:text="s"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="13dp"
-            android:layout_y="332dp"
+            android:layout_x="29dp"
+            android:layout_y="311dp"
             android:text="30秒限时时间:"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv8"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
-            android:layout_x="124dp"
-            android:layout_y="333dp"
+            android:layout_x="139dp"
+            android:layout_y="311dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_x="200dp"
-            android:layout_y="331dp"
+            android:layout_x="215dp"
+            android:layout_y="308dp"
             android:text="s"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="362dp"
+            android:layout_x="256dp"
+            android:layout_y="231dp"
             android:text="串联驱动电压:"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv9"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
-            android:layout_x="124dp"
-            android:layout_y="363dp"
+            android:layout_x="364dp"
+            android:layout_y="230dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_x="201dp"
-            android:layout_y="363dp"
+            android:layout_x="445dp"
+            android:layout_y="229dp"
             android:text="V"
             android:textColor="#000000"
-            android:textSize="16sp" />
-
-
-        <TextView
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="393dp"
-            android:text="断相电压 :"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/item1_tv10"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:layout_x="124dp"
-            android:layout_y="393dp"
-            android:background="@drawable/dialog_test2_22"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_x="201dp"
-            android:layout_y="393dp"
-            android:text="V"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="423dp"
-            android:text="线圈压降 :"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/item1_tv11"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:layout_x="124dp"
-            android:layout_y="423dp"
-            android:background="@drawable/dialog_test2_22"
-            android:gravity="center"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_x="203dp"
-            android:layout_y="424dp"
-            android:text="V "
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="452dp"
+            android:layout_x="256dp"
+            android:layout_y="256dp"
+            android:text="断相直流电压 :"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/item1_tv10"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_x="364dp"
+            android:layout_y="256dp"
+            android:background="@drawable/dialog_test2_22"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_x="442dp"
+            android:layout_y="255dp"
+            android:text="V"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="256dp"
+            android:layout_y="284dp"
             android:text="绝缘电阻 :    ＞"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv12"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
-            android:layout_x="124dp"
-            android:layout_y="453dp"
+            android:layout_x="364dp"
+            android:layout_y="284dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="49dp"
             android:layout_height="wrap_content"
-            android:layout_x="202dp"
-            android:layout_y="452dp"
+            android:layout_x="442dp"
+            android:layout_y="282dp"
             android:text="MΩ"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <TextView
             android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_x="14dp"
-            android:layout_y="484dp"
-            android:text="A、B机故障 :"
-            android:textColor="#000000"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/item1_tv13"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_x="124dp"
-            android:layout_y="484dp"
-            android:background="@drawable/dialog_test2_22"
-            android:gravity="center"
-            android:textColor="#000"
-            android:textSize="16sp" />
-
-
-        <TextView
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:layout_x="12dp"
-            android:layout_y="512dp"
+            android:layout_x="256dp"
+            android:layout_y="311dp"
             android:text="测试结论 :"
             android:textColor="#30319e"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/item1_tv14"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
-            android:layout_x="124dp"
-            android:layout_y="512dp"
+            android:layout_x="364dp"
+            android:layout_y="311dp"
             android:background="@drawable/dialog_test2_22"
             android:gravity="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
         <Button
             android:id="@+id/item1_btn"
             android:layout_width="138dp"
             android:layout_height="29dp"
-            android:layout_x="53dp"
-            android:layout_y="556dp"
+            android:layout_x="176dp"
+            android:layout_y="377dp"
             android:background="@drawable/queding"
             android:text="打印测试报告"
             android:textColor="#777777"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="209dp"
+            android:layout_y="51dp"
+            android:text="基本信息"
+            android:textSize="19sp"
+            tools:layout_editor_absoluteX="45dp"
+            tools:layout_editor_absoluteY="48dp" />
+
 
     </AbsoluteLayout>
 </LinearLayout>

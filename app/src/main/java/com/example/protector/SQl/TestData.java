@@ -20,7 +20,6 @@ public class TestData extends DataSupport implements Serializable {
     private String xinghao = "无";//型号
     private String shengchanchang = "无";//生产厂
     private String chanpinname = "无";//产品明
-    private String mode = "0";//模式
     private String tongguo = "0";//是否通过
     private String cecheng = "0";//测程
     private String ceshishichang = "0";//测试时长
@@ -72,14 +71,6 @@ public class TestData extends DataSupport implements Serializable {
 
     public void setSave(int save) {
         this.save = save;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
     }
 
     public String getTongguo() {

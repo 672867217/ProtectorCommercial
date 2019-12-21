@@ -2,70 +2,23 @@
 <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="1024dp"
-    android:layout_height="768dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#ccccfe"
     android:focusable="true"
     android:focusableInTouchMode="true"
     tools:context=".NumberQuery">
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="208dp"
-        android:layout_y="45dp"
-        android:text="ERP通讯："
-        android:textColor="#000"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="69dp" />
-
-    <TextView
-        android:id="@+id/neibutongxun2"
-        android:layout_width="53dp"
-        android:layout_height="21dp"
-        android:layout_x="104dp"
-        android:layout_y="44dp"
-        android:background="@drawable/f_yuanjiao"
-        android:gravity="center"
-        android:text="正常"
-        android:textColor="#000"
-        android:textSize="13sp"
-        tools:layout_editor_absoluteX="263dp"
-        tools:layout_editor_absoluteY="69dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="21dp"
-        android:layout_y="45dp"
-        android:text="内部通讯："
-        android:textColor="#000"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="69dp" />
-
-    <TextView
-        android:id="@+id/erptongxun"
-        android:layout_width="53dp"
-        android:layout_height="21dp"
-        android:layout_x="292dp"
-        android:layout_y="45dp"
-        android:background="@drawable/f_yuanjiao"
-        android:gravity="center"
-        android:text="脱机"
-        android:textColor="#000"
-        android:textSize="13sp"
-        tools:layout_editor_absoluteX="263dp"
-        tools:layout_editor_absoluteY="69dp" />
+    <AbsoluteLayout
+        android:layout_width="1024dp"
+        android:layout_height="618dp">
 
     <Button
         android:id="@+id/chaxun"
         android:layout_width="64dp"
         android:layout_height="32dp"
-        android:layout_x="440dp"
-        android:layout_y="40dp"
+        android:layout_x="870dp"
+        android:layout_y="26dp"
         android:background="@drawable/tongji"
         android:text="查  询"
         android:textSize="18sp"
@@ -76,8 +29,8 @@
         android:id="@+id/fanhui"
         android:layout_width="64dp"
         android:layout_height="32dp"
-        android:layout_x="516dp"
-        android:layout_y="40dp"
+        android:layout_x="946dp"
+        android:layout_y="26dp"
         android:background="@drawable/baocun"
         android:text="返  回"
         android:textSize="18sp"
@@ -103,16 +56,16 @@
         android:layout_y="83dp"
         android:background="#98fffe"
         android:gravity="center"
-        android:inputType="number"
         android:imeOptions="actionDone"
+        android:inputType="number"
         android:textColor="#000000"
         android:textSize="15dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="239dp"
-        android:layout_y="82dp"
+        android:layout_x="230dp"
+        android:layout_y="83dp"
         android:gravity="right"
         android:text="产品名称 :"
         android:textColor="#000"
@@ -122,18 +75,18 @@
         android:id="@+id/chanpin_spinner"
         android:layout_width="207dp"
         android:layout_height="21dp"
-        android:layout_x="325dp"
-        android:layout_y="82dp"
-        android:paddingRight="10dp"
+        android:layout_x="313dp"
+        android:layout_y="83dp"
         android:background="@drawable/my_spinner"
         android:gravity="center"
+        android:paddingRight="10dp"
         android:spinnerMode="dropdown" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_x="555dp"
+        android:layout_x="543dp"
         android:layout_y="84dp"
         android:text="型号 :"
         android:textColor="#000"
@@ -143,7 +96,7 @@
         android:id="@+id/xinghao"
         android:layout_width="116dp"
         android:layout_height="wrap_content"
-        android:layout_x="608dp"
+        android:layout_x="595dp"
         android:layout_y="83dp"
         android:background="@drawable/dialog_test2_2"
         android:gravity="center"
@@ -155,8 +108,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="44dp"
-        android:layout_x="758dp"
-        android:layout_y="84dp"
+        android:layout_x="745dp"
+        android:layout_y="83dp"
         android:gravity="center"
         android:text="生产厂  :"
         android:textColor="#000"
@@ -166,8 +119,8 @@
         android:id="@+id/shengchanchang"
         android:layout_width="188dp"
         android:layout_height="wrap_content"
-        android:layout_x="824dp"
-        android:layout_y="83dp"
+        android:layout_x="813dp"
+        android:layout_y="86dp"
         android:background="@drawable/dialog_test2_2"
         android:gravity="center"
         android:text=" "
@@ -176,16 +129,26 @@
 
     <GridView
         android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="611dp"
-        android:layout_x="0dp"
-        android:layout_y="128dp"
-        android:horizontalSpacing="10dp"
-        android:numColumns="4"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_width="992dp"
+        android:layout_height="430dp"
+        android:layout_x="15dp"
+        android:layout_y="135dp"
+        android:horizontalSpacing="8dp"
+        android:numColumns="2"
+        android:orientation="horizontal">
 
     </GridView>
 
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="447dp"
+        android:layout_y="20dp"
+        android:text="按编号查询"
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="18dp" />
+
+    </AbsoluteLayout>
 </AbsoluteLayout>

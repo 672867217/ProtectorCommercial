@@ -9,63 +9,12 @@
     android:focusableInTouchMode="true"
     tools:context=".DateQuery">
 
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="208dp"
-        android:layout_y="45dp"
-        android:text="ERP通讯："
-        android:textColor="#fff"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="69dp" />
-
-    <TextView
-        android:id="@+id/neibutongxun2"
-        android:layout_width="53dp"
-        android:layout_height="21dp"
-        android:layout_x="104dp"
-        android:layout_y="44dp"
-        android:background="@drawable/f_yuanjiao"
-        android:gravity="center"
-        android:text="正常"
-        android:textColor="#000"
-        android:textSize="13sp"
-        tools:layout_editor_absoluteX="263dp"
-        tools:layout_editor_absoluteY="69dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="21dp"
-        android:layout_y="45dp"
-        android:text="内部通讯："
-        android:textColor="#fff"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="69dp" />
-
-    <TextView
-        android:id="@+id/erptongxun"
-        android:layout_width="53dp"
-        android:layout_height="21dp"
-        android:layout_x="292dp"
-        android:layout_y="45dp"
-        android:background="@drawable/f_yuanjiao"
-        android:gravity="center"
-        android:text="脱机"
-        android:textColor="#000"
-        android:textSize="13sp"
-        tools:layout_editor_absoluteX="263dp"
-        tools:layout_editor_absoluteY="69dp" />
-
     <Button
         android:id="@+id/btn_chaxuan"
         android:layout_width="64dp"
         android:layout_height="32dp"
-        android:layout_x="440dp"
-        android:layout_y="40dp"
+        android:layout_x="842dp"
+        android:layout_y="27dp"
         android:background="@drawable/tongji"
         android:text="查  询"
         android:textSize="20sp"
@@ -76,8 +25,8 @@
         android:id="@+id/btn_cancel"
         android:layout_width="64dp"
         android:layout_height="32dp"
-        android:layout_x="516dp"
-        android:layout_y="40dp"
+        android:layout_x="932dp"
+        android:layout_y="27dp"
         android:background="@drawable/baocun"
         android:text="返  回"
         android:textSize="20sp"
@@ -187,9 +136,9 @@
         android:layout_y="85dp"
         android:background="#fff"
         android:gravity="center"
-        android:text="一测"
+        android:text="出所测"
         android:textColor="#000"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="970dp"
@@ -380,6 +329,7 @@
             android:background="@drawable/f_baisebiankuan"
             android:gravity="center"
             android:text="0"
+            android:inputType="number"
             android:textColor="#000"
             android:textSize="24sp" />
 
@@ -403,5 +353,17 @@
         android:background="#feffd7"
         tools:layout_editor_absoluteX="790dp"
         tools:layout_editor_absoluteY="41dp" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="422dp"
+        android:layout_y="20dp"
+        android:text="按日期查询"
+        android:textColor="#fff"
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="32dp" />
 
 </AbsoluteLayout>

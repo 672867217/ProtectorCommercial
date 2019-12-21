@@ -5,15 +5,13 @@
     <application
         android:name=".util.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/logo"
+        android:label="断相保护器智能测试台"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".QueryResult"></activity>
         <activity android:name=".DateQuery" />
-        <activity android:name=".NumberQuery" />
-        <activity android:name=".Test" />
         <activity android:name=".ErrorAnalysis" />
         <activity android:name=".MainActivity">
             <intent-filter>
